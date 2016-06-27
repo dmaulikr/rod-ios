@@ -114,8 +114,9 @@
     
     User *user = [fetchedObjects firstObject];
     
-    self.runs = [user.runs allObjects];
-    
+    NSSortDescriptor *dateSort = [NSSortDescriptor sortDescriptorWithKey:@"datetime" ascending:NO];
+    self.runs = [[user.runs allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:dateSort]];
+
     [self.tableView reloadData];
     
 }
