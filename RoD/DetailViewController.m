@@ -7,6 +7,9 @@
 //
 
 #import "DetailViewController.h"
+#import "Run.h"
+#import "User.h"
+
 
 @interface DetailViewController ()
 
@@ -28,7 +31,8 @@
 - (void)configureView {
     // Update the user interface for the detail item.
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+        self.detailDescriptionLabel.text = [((Run *)self.detailItem).distance stringValue];
+        
     }
 }
 
