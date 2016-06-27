@@ -27,6 +27,8 @@
     
     // Initialize RestKit
     NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run"];
+//    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
+    
     RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:baseURL];
     
     // Initialize managed object model from bundle
@@ -73,7 +75,7 @@
             @"duration" : @"duration",
             @"pace"     : @"pace",
             @"speed"    : @"speed",
-            @"duration" : @"duration",
+            @"datetime" : @"datetime",
             @"id"       : @"runId",
             @"user_id"  : @"userId"
         }

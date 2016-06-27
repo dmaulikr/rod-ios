@@ -28,6 +28,8 @@
 		<dict>
 			<key>app.runordie.run</key>
 			<string></string>
+			<key>localhost</key>
+			<string></string>
 		</dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>

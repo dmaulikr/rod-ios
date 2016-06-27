@@ -15,6 +15,9 @@
 #import "Run.h"
 #import "User.h"
 
+#import "DateTools.h"
+
+
 @interface MasterViewController ()
 
 @property NSArray *runs;
@@ -58,22 +61,19 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    NSLog(@"Number of rows: %lu", (unsigned long)[self.runs count]);
     return [self.runs count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    // format date
-    
-
-    //
     
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     Run *run = self.runs[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ Km", [run.distance stringValue]];
     
-    cell.detailTextLabel.text = @"Pedro";
+    cell.detailTextLabel.text = run.datetime.timeAgoSinceNow;
     return cell;
 }
 
@@ -81,7 +81,11 @@
 #pragma mark - RESTKit
 
 - (void)requestData {
+//  Production
     NSString *requestPath = @"/api/v1/users/6?user_email=pedroanisio@gmail.com&user_token=2SyHaQrDMBj9EhZNKnNq";
+    
+// Development
+//    NSString *requestPath = @"/api/v1/users/7?user_email=runordieadm@gmail.com&user_token=-Ee48k2xe532wEJ3Uh4V";
     
     
     [[RKObjectManager sharedManager]

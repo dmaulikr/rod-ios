@@ -5,6 +5,7 @@ target 'RoD' do
   # Pods for RoD
 
     pod 'RestKit'
+    pod 'DateTools'    
 
   target 'RoDTests' do
     inherit! :search_paths
