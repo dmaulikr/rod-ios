@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DE215CD1F4A3E95E0E820F2 /* libPods-RoD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 588251B957195DD6B1BCAEE7 /* libPods-RoD.a */; };
+		1F60172F1D22C74500144C2B /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F60172B1D22C74500144C2B /* MasterViewController.m */; };
+		1F6017301D22C74500144C2B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F60172D1D22C74500144C2B /* DetailViewController.m */; };
+		1F6017331D22CBD000144C2B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6017321D22CBD000144C2B /* LoginViewController.m */; };
 		1F844C251D216098002EC430 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C241D216098002EC430 /* main.m */; };
 		1F844C281D216098002EC430 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C271D216098002EC430 /* AppDelegate.m */; };
-		1F844C2B1D216098002EC430 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C2A1D216098002EC430 /* MasterViewController.m */; };
-		1F844C2E1D216098002EC430 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C2D1D216098002EC430 /* DetailViewController.m */; };
 		1F844C311D216098002EC430 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F844C2F1D216098002EC430 /* Main.storyboard */; };
 		1F844C331D216098002EC430 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F844C321D216098002EC430 /* Assets.xcassets */; };
 		1F844C361D216098002EC430 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F844C341D216098002EC430 /* LaunchScreen.storyboard */; };
@@ -31,9 +33,8 @@
 		1F844C701D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
 		1F844C711D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
 		1F844C721D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
-		64877594ADF4E3D3B09055C9 /* libPods-RoD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F14D4DF44627B7AE0C98C42C /* libPods-RoD.a */; };
-		7F15D78B54E058B1E1590190 /* libPods-RoDTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143EE126C97987E1533E7F8E /* libPods-RoDTests.a */; };
-		FF588777A404927B21C7BD4E /* libPods-RoDUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE49D9FE8DAD8704468B872F /* libPods-RoDUITests.a */; };
+		8C07DA697BEDDB4EFE123DAF /* libPods-RoDTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C92B067CE7636E59F2DDB3 /* libPods-RoDTests.a */; };
+		E5A97251A72146AFD88C9E4A /* libPods-RoDUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6257BF3A7AFB5A004327CDC9 /* libPods-RoDUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,15 +55,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		143EE126C97987E1533E7F8E /* libPods-RoDTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoDTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F60172B1D22C74500144C2B /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		1F60172C1D22C74500144C2B /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		1F60172D1D22C74500144C2B /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		1F60172E1D22C74500144C2B /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		1F6017311D22CBD000144C2B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		1F6017321D22CBD000144C2B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		1F844C201D216098002EC430 /* RoD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F844C241D216098002EC430 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1F844C261D216098002EC430 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1F844C271D216098002EC430 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1F844C291D216098002EC430 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		1F844C2A1D216098002EC430 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		1F844C2C1D216098002EC430 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		1F844C2D1D216098002EC430 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		1F844C301D216098002EC430 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1F844C321D216098002EC430 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F844C351D216098002EC430 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -85,11 +87,12 @@
 		2FE00FA8C6A8F8D2CEA1EAD8 /* Pods-RoDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoDTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoDTests/Pods-RoDTests.release.xcconfig"; sourceTree = "<group>"; };
 		41D491880CAA75BA082F49A7 /* Pods-RoDUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoDUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoDUITests/Pods-RoDUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		469C5F277037A1BC542A7317 /* Pods-RoD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoD.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoD/Pods-RoD.debug.xcconfig"; sourceTree = "<group>"; };
+		46C92B067CE7636E59F2DDB3 /* libPods-RoDTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoDTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		588251B957195DD6B1BCAEE7 /* libPods-RoD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoD.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6257BF3A7AFB5A004327CDC9 /* libPods-RoDUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoDUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74440DC6A7B732C6C61E3CA3 /* Pods-RoD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoD.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoD/Pods-RoD.release.xcconfig"; sourceTree = "<group>"; };
 		817E45A3A4693AF1371C834A /* Pods-RoDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoDTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoDTests/Pods-RoDTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AFBB08EB1586EEE7F0BA1C6F /* Pods-RoDUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoDUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoDUITests/Pods-RoDUITests.release.xcconfig"; sourceTree = "<group>"; };
-		DE49D9FE8DAD8704468B872F /* libPods-RoDUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoDUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F14D4DF44627B7AE0C98C42C /* libPods-RoD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoD.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64877594ADF4E3D3B09055C9 /* libPods-RoD.a in Frameworks */,
+				1DE215CD1F4A3E95E0E820F2 /* libPods-RoD.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F15D78B54E058B1E1590190 /* libPods-RoDTests.a in Frameworks */,
+				8C07DA697BEDDB4EFE123DAF /* libPods-RoDTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,13 +116,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF588777A404927B21C7BD4E /* libPods-RoDUITests.a in Frameworks */,
+				E5A97251A72146AFD88C9E4A /* libPods-RoDUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F60172A1D22C43F00144C2B /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F60172B1D22C74500144C2B /* MasterViewController.m */,
+				1F60172C1D22C74500144C2B /* MasterViewController.h */,
+				1F60172D1D22C74500144C2B /* DetailViewController.m */,
+				1F60172E1D22C74500144C2B /* DetailViewController.h */,
+				1F6017311D22CBD000144C2B /* LoginViewController.h */,
+				1F6017321D22CBD000144C2B /* LoginViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
 		1F844C171D216098002EC430 = {
 			isa = PBXGroup;
 			children = (
@@ -145,13 +161,10 @@
 		1F844C221D216098002EC430 /* RoD */ = {
 			isa = PBXGroup;
 			children = (
+				1F60172A1D22C43F00144C2B /* controller */,
 				1F844C591D216152002EC430 /* model */,
 				1F844C261D216098002EC430 /* AppDelegate.h */,
 				1F844C271D216098002EC430 /* AppDelegate.m */,
-				1F844C291D216098002EC430 /* MasterViewController.h */,
-				1F844C2A1D216098002EC430 /* MasterViewController.m */,
-				1F844C2C1D216098002EC430 /* DetailViewController.h */,
-				1F844C2D1D216098002EC430 /* DetailViewController.m */,
 				1F844C2F1D216098002EC430 /* Main.storyboard */,
 				1F844C321D216098002EC430 /* Assets.xcassets */,
 				1F844C341D216098002EC430 /* LaunchScreen.storyboard */,
@@ -219,9 +232,9 @@
 		F34DC7FFFC1FF1819AFCB171 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F14D4DF44627B7AE0C98C42C /* libPods-RoD.a */,
-				143EE126C97987E1533E7F8E /* libPods-RoDTests.a */,
-				DE49D9FE8DAD8704468B872F /* libPods-RoDUITests.a */,
+				588251B957195DD6B1BCAEE7 /* libPods-RoD.a */,
+				46C92B067CE7636E59F2DDB3 /* libPods-RoDTests.a */,
+				6257BF3A7AFB5A004327CDC9 /* libPods-RoDUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -490,13 +503,14 @@
 			files = (
 				1F844C281D216098002EC430 /* AppDelegate.m in Sources */,
 				1F844C5C1D2161B6002EC430 /* DataModel.xcdatamodeld in Sources */,
+				1F6017301D22C74500144C2B /* DetailViewController.m in Sources */,
 				1F844C701D2165D2002EC430 /* User.m in Sources */,
+				1F6017331D22CBD000144C2B /* LoginViewController.m in Sources */,
 				1F844C6A1D2165D2002EC430 /* Run.m in Sources */,
-				1F844C2B1D216098002EC430 /* MasterViewController.m in Sources */,
+				1F60172F1D22C74500144C2B /* MasterViewController.m in Sources */,
 				1F844C671D2165D2002EC430 /* Run+CoreDataProperties.m in Sources */,
 				1F844C251D216098002EC430 /* main.m in Sources */,
 				1F844C6D1D2165D2002EC430 /* User+CoreDataProperties.m in Sources */,
-				1F844C2E1D216098002EC430 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,6 +672,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SOCKit\"",
 					"\"${PODS_ROOT}/Headers/Public/TransitionKit\"",
 					"${PODS_ROOT}/**",
+					"${SRCROOT}/controller",
 				);
 				INFOPLIST_FILE = RoD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -685,6 +700,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SOCKit\"",
 					"\"${PODS_ROOT}/Headers/Public/TransitionKit\"",
 					"${PODS_ROOT}/**",
+					"${SRCROOT}/controller",
 				);
 				INFOPLIST_FILE = RoD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

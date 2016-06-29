@@ -81,8 +81,18 @@
 #pragma mark - RESTKit
 
 - (void)requestData {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *userToken = [defaults objectForKey:@"user_token"];
+    NSString *userEmail = [defaults objectForKey:@"user_email"];
+    NSString *userId    = [defaults objectForKey:@"user_id"];
+
+    
+    NSString *requestPath = [NSString stringWithFormat:@"/api/v1/users/%@?user_email=%@&user_token=%@", userId, userEmail, userToken];
+    
 //  Production
-    NSString *requestPath = @"/api/v1/users/6?user_email=pedroanisio@gmail.com&user_token=2SyHaQrDMBj9EhZNKnNq";
+//    NSString *requestPath = @"/api/v1/users/6?user_email=pedroanisio@gmail.com&user_token=2SyHaQrDMBj9EhZNKnNq";
     
 // Development
 //    NSString *requestPath = @"/api/v1/users/7?user_email=runordieadm@gmail.com&user_token=-Ee48k2xe532wEJ3Uh4V";

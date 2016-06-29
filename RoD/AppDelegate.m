@@ -17,13 +17,44 @@
 
 @implementation AppDelegate
 
+-(BOOL) authenticatedUser {
+    
+    // Get the stored data before the view loads
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *userToken = [defaults objectForKey:@"user_token"];
+    NSString *userEmail = [defaults objectForKey:@"user_email"];
+    
+    if ([userEmail length] > 3 && [userToken length] > 3) {
+        return TRUE;
+
+    } else {
+        return FALSE;
+    }
+    
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
-    splitViewController.delegate = self;
+    
+    //authenticatedUser: check from NSUserDefaults User credential if its present then set your navigation flow accordingly
+    
+    if (self.authenticatedUser)
+    {
+        // Override point for customization after application launch.
+//        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+//        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+//        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+//        splitViewController.delegate = self;
+    }
+    else
+    {
+        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+        
+        self.window.rootViewController = navigation;
+    }
+    
     
     // Initialize RestKit
     NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run"];
