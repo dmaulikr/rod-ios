@@ -24,7 +24,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.txtPassword.delegate = self;
     // Do any additional setup after loading the view.
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self myLogin];
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +92,7 @@
                                                                                             [defaults setObject:[JSON objectForKey:@"user_id"] forKey:@"user_id"];
                                                                                             
                                                                                             [defaults synchronize];
+                                                                                            [self pushAuthUserView];
                                                                                                                                                                                         
                                                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                                                             NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
@@ -93,6 +101,15 @@
     
     [operation start];
     [operation waitUntilFinished];
+    
+
+    
+}
+
+- (void) pushAuthUserView {
+    AppDelegate *myDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    myDelegate.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"Master"];
 }
 
 
