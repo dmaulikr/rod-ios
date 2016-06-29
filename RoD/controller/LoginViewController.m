@@ -8,6 +8,10 @@
 
 #import "LoginViewController.h"
 #import "AFNetworking.h"
+#import <RestKit/CoreData.h>
+#import <RestKit/RestKit.h>
+
+
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
@@ -30,6 +34,29 @@
 - (IBAction)tryLogin:(id)sender {
     self.msgAlert.text = @"apertou o botao";
     [self myLogin];
+}
+
+-(void) myLogoff{
+    
+    // Cancel any network operations and clear the cache
+    [[RKObjectManager sharedManager].operationQueue cancelAllOperations];
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
+    // Cancel any object mapping in the response mapping queue
+    [[RKObjectRequestOperation responseMappingQueue] cancelAllOperations];
+    
+    // Reset persistent stores
+    [[RKManagedObjectStore defaultStore] resetPersistentStores:nil];
+    
+    // Store the data
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults removeObjectForKey:@"user_email"];
+    [defaults removeObjectForKey:@"user_token"];
+    [defaults removeObjectForKey:@"user_id"];
+    
+    [defaults synchronize];
+
 }
 
 -(void) myLogin {
