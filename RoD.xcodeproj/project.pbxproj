@@ -13,6 +13,7 @@
 		1F6017331D22CBD000144C2B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6017321D22CBD000144C2B /* LoginViewController.m */; };
 		1F6485251D243E690019EB8A /* RoD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6485241D243E690019EB8A /* RoD.storyboard */; };
 		1F6485691D244CEA0019EB8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6485681D244CEA0019EB8A /* Main.storyboard */; };
+		1F64856C1D2470390019EB8A /* NewRunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64856B1D2470390019EB8A /* NewRunViewController.m */; };
 		1F844C251D216098002EC430 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C241D216098002EC430 /* main.m */; };
 		1F844C281D216098002EC430 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C271D216098002EC430 /* AppDelegate.m */; };
 		1F844C331D216098002EC430 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F844C321D216098002EC430 /* Assets.xcassets */; };
@@ -64,6 +65,8 @@
 		1F6017321D22CBD000144C2B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		1F6485241D243E690019EB8A /* RoD.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RoD.storyboard; sourceTree = "<group>"; };
 		1F6485681D244CEA0019EB8A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		1F64856A1D2470390019EB8A /* NewRunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRunViewController.h; sourceTree = "<group>"; };
+		1F64856B1D2470390019EB8A /* NewRunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRunViewController.m; sourceTree = "<group>"; };
 		1F844C201D216098002EC430 /* RoD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F844C241D216098002EC430 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1F844C261D216098002EC430 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -134,6 +137,8 @@
 				1F60172E1D22C74500144C2B /* DetailViewController.h */,
 				1F6017311D22CBD000144C2B /* LoginViewController.h */,
 				1F6017321D22CBD000144C2B /* LoginViewController.m */,
+				1F64856A1D2470390019EB8A /* NewRunViewController.h */,
+				1F64856B1D2470390019EB8A /* NewRunViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -522,6 +527,7 @@
 				1F60172F1D22C74500144C2B /* MasterViewController.m in Sources */,
 				1F844C671D2165D2002EC430 /* Run+CoreDataProperties.m in Sources */,
 				1F844C251D216098002EC430 /* main.m in Sources */,
+				1F64856C1D2470390019EB8A /* NewRunViewController.m in Sources */,
 				1F844C6D1D2165D2002EC430 /* User+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

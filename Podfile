@@ -5,7 +5,8 @@ target 'RoD' do
   # Pods for RoD
 
     pod 'RestKit'
-    pod 'DateTools'  
+    pod 'DateTools' 
+    pod "MagicalRecord" 
 
   target 'RoDTests' do
     inherit! :search_paths
