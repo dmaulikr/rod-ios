@@ -10,12 +10,23 @@
 #import "DetailViewController.h"
 #import <RestKit/CoreData.h>
 #import <RestKit/RestKit.h>
+#import <MagicalRecord/MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord+ShorthandMethods.h>
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
 @end
 
+// Use a class extension to expose access to MagicalRecord's private setter methods
+@interface NSManagedObjectContext ()
++ (void)MR_setRootSavingContext:(NSManagedObjectContext *)context;
++ (void)MR_setDefaultContext:(NSManagedObjectContext *)moc;
+@end
+
 @implementation AppDelegate
+
+@synthesize managedObjectContext;
+
 
 -(BOOL) authenticatedUser {
     
@@ -37,29 +48,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //authenticatedUser: check from NSUserDefaults User credential if its present then set your navigation flow accordingly
-    
-    if (self.authenticatedUser)
-    {
-        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
-        
-        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
-        splitViewController.delegate = self;
-    }
-    else
-    {
-        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
-        
-        self.window.rootViewController = navigation;
-    }
+    [MagicalRecord enableShorthandMethods];
     
     
     // Initialize RestKit
-    NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run"];
-//    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
+    // NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run"];
+    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
     
     RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:baseURL];
     
@@ -68,6 +62,7 @@
     // Initialize managed object store
     RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc] initWithManagedObjectModel:managedObjectModel];
     objectManager.managedObjectStore = managedObjectStore;
+
     
     // Complete Core Data stack initialization
     [managedObjectStore createPersistentStoreCoordinator];
@@ -79,6 +74,11 @@
     
     // Create the managed object contexts
     [managedObjectStore createManagedObjectContexts];
+    
+    // Configure MagicalRecord to use RestKit's Core Data stack
+    [NSPersistentStoreCoordinator MR_setDefaultStoreCoordinator:managedObjectStore.persistentStoreCoordinator];
+    [NSManagedObjectContext MR_setRootSavingContext:managedObjectStore.persistentStoreManagedObjectContext];
+    [NSManagedObjectContext MR_setDefaultContext:managedObjectStore.mainQueueManagedObjectContext];
     
     // Configure a managed object cache to ensure we do not create duplicate objects
     managedObjectStore.managedObjectCache = [[RKInMemoryManagedObjectCache alloc] initWithManagedObjectContext:managedObjectStore.persistentStoreManagedObjectContext];
@@ -132,9 +132,41 @@
     
     // Enable Activity Indicator Spinner
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+ 
+    //authenticatedUser: check from NSUserDefaults User credential if its present then set your navigation flow accordingly
+    if (self.authenticatedUser)
+    {
+        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+        
+        //        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+        //        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        //        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
+        //        splitViewController.delegate = self;
+    }
+    else
+    {
+        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+        
+        self.window.rootViewController = navigation;
+    }
     
     return YES;
 }
+
+// Shared context
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+    return [NSManagedObjectContext MR_defaultContext];
+}
+
++ (AppDelegate *)sharedAppDelegate
+{
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -154,8 +186,10 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    // Saves changes in the application's managed object context before the application terminates.
+    [MagicalRecord cleanUp];
 }
 
 #pragma mark - Split view

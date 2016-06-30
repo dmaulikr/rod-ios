@@ -68,8 +68,10 @@
 
 -(void) myLogin {
     
-//    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
-    NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run/api/v1/"];
+
+    
+    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
+//    NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run/api/v1/"];
 
     
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
@@ -109,7 +111,7 @@
 - (void) pushAuthUserView {
     AppDelegate *myDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    myDelegate.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"Master"];
+    myDelegate.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"TabBar"];
 }
 
 
