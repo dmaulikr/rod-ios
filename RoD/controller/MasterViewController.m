@@ -8,6 +8,7 @@
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+#import "NewRunViewController.h"
 
 #import <RestKit/CoreData.h>
 #import <RestKit/RestKit.h>
@@ -36,6 +37,10 @@
     [self requestData];
 }
 
+- (void) onPostResource:(NewRunViewController *)sender {
+    [self requestData];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -51,6 +56,12 @@
         [controller setDetailItem:run];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
+    }
+    
+    if ([[segue identifier] isEqualToString:@"addRun"]) {
+        NewRunViewController *controller = (NewRunViewController *)[segue destinationViewController];
+        controller.delegate = self;
+        
     }
 }
 

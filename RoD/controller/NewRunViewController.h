@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+@class NewRunViewController;
+@protocol NewRunViewControllerDelegate <NSObject>   //define delegate protocol
+- (void) onPostResource: (NewRunViewController *) sender;  //define delegate method to be implemented within another class
+@end //end protocol
 
 @interface NewRunViewController : UIViewController
+@property (nonatomic, weak) IBOutlet id <NewRunViewControllerDelegate> delegate; //define MyClassDelegate as delegate
+
 
 @end

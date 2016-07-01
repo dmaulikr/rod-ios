@@ -19,6 +19,8 @@
 @end
 
 @implementation NewRunViewController
+@synthesize delegate; //synthesise  MyClassDelegate delegate
+
 
 - (void)viewDidLoad {
     self.txtDateTIme.delegate = self;
@@ -44,9 +46,6 @@
 
 - (IBAction)doPostRun:(id)sender {
     
-    RKManagedObjectStore *objectStore = [[RKObjectManager sharedManager] managedObjectStore];
-
-    
     // Log all HTTP traffic with request and response bodies
     RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
     
@@ -61,6 +60,19 @@
     
     
     NSString *requestPath = [NSString stringWithFormat:@"/api/v1/users/%@/runs?user_email=%@&user_token=%@", userId, userEmail, userToken];
+    NSString *requestPathResponseReady = [NSString stringWithFormat:@"/api/v1/users/%@/runs", userId, userEmail, userToken];
+
+    
+    RKObjectMapping *userMapping = [RKObjectMapping mappingForClass:[User class]];
+    [userMapping
+     addAttributeMappingsFromDictionary:
+     @{
+       @"email"         : @"email",
+       @"status"        : @"status",
+       @"name"          : @"name",
+       @"id"            : @"userId"
+       }
+     ];
     
     RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Run class]];
     [responseMapping
@@ -71,14 +83,9 @@
        @"pace"     : @"pace",
        @"speed"    : @"speed",
        @"datetime" : @"datetime",
-       @"id"       : @"runId",
-       @"user_id"  : @"userId"
+       @"id"       : @"runId"
        }
      ];
-    
-    NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
-    RKResponseDescriptor *runDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:requestPath keyPath:@"run" statusCodes:statusCodes];
-    
     
     RKObjectMapping *requestMapping = [RKObjectMapping requestMapping]; // objectClass == NSMutableDictionary
     [requestMapping
@@ -87,25 +94,29 @@
        @"distance" : @"distance",
        @"duration" : @"duration",
        @"datetime" : @"datetime",
-       @"userId"  : @"user_id"
+       @"userId"  :  @"user_id"
        }
      ];
     
-    // For any object of class Article, serialize into an NSMutableDictionary using the given mapping and nest
-    // under the 'article' key path
-    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Run class] rootKeyPath:nil method:RKRequestMethodAny];
+//    [responseMapping addPropertyMapping:
+//     [RKRelationshipMapping relationshipMappingFromKeyPath:@"user"
+//                                                 toKeyPath:@"user"
+//                                               withMapping:userMapping]
+//     ];
+    
+    NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:requestPathResponseReady keyPath:@"" statusCodes:statusCodes];
+//    
+    
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Run class] rootKeyPath:@"" method:RKRequestMethodAny];
     
     [[RKObjectManager sharedManager] addRequestDescriptor:requestDescriptor];
-    [[RKObjectManager sharedManager] addResponseDescriptor:runDescriptor];
+    [[RKObjectManager sharedManager] addResponseDescriptor:responseDescriptor];
     
     AppDelegate* appDelegate = [AppDelegate sharedAppDelegate];
     
     Run *newRun = [NSEntityDescription insertNewObjectForEntityForName:@"Run" inManagedObjectContext:appDelegate.managedObjectContext];
-
-    int minutes = 654*60 / 60;
-    int seconds = 654*60 % 60;
-    
-    NSString *duration_formated = [NSString stringWithFormat:@"%i:%i",minutes,seconds];
     
     newRun.distance = [NSNumber numberWithInt:99];
     newRun.duration = [NSNumber numberWithInt:60*60];
@@ -114,7 +125,10 @@
                                       withValue:userId];
     
     // POST to create
-    [[RKObjectManager sharedManager] postObject:newRun path:requestPath parameters:nil success:nil failure:nil];
+    [[RKObjectManager sharedManager] postObject:newRun path:requestPath parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        [self didPost];
+    } failure:nil];
+
     
 //    // PATCH to update
 //    article.body = @"New Body";
@@ -124,6 +138,10 @@
 //    [manager deleteObject:article path:@"/articles/1234" parameters:nil success:nil failure:nil];
 }
 
+
+- (void) didPost {
+    [self.delegate onPostResource:nil]; //this will call the method implemented in your other class
+}
 
 - (void)changeDate:(UIDatePicker *)sender {
     NSLog(@"New Date: %@", sender.date);
@@ -185,4 +203,7 @@
     darkView.alpha = 0.5;
     [UIView commitAnimations];
 }
+
+
+
 @end
