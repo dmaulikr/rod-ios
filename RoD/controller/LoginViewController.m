@@ -70,8 +70,8 @@
     
 
     
-    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
-//    NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run/api/v1/"];
+ //   NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
+    NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run/api/v1/"];
 
     
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];

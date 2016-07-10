@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DE215CD1F4A3E95E0E820F2 /* libPods-RoD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 588251B957195DD6B1BCAEE7 /* libPods-RoD.a */; };
+		1F24642F1D31692100BE84FA /* RunTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F24642E1D31692100BE84FA /* RunTableViewCell.m */; };
 		1F60172F1D22C74500144C2B /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F60172B1D22C74500144C2B /* MasterViewController.m */; };
 		1F6017301D22C74500144C2B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F60172D1D22C74500144C2B /* DetailViewController.m */; };
 		1F6017331D22CBD000144C2B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6017321D22CBD000144C2B /* LoginViewController.m */; };
@@ -57,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F24642D1D31692100BE84FA /* RunTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunTableViewCell.h; sourceTree = "<group>"; };
+		1F24642E1D31692100BE84FA /* RunTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunTableViewCell.m; sourceTree = "<group>"; };
 		1F60172B1D22C74500144C2B /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		1F60172C1D22C74500144C2B /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		1F60172D1D22C74500144C2B /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
@@ -128,9 +131,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F24642C1D3168FF00BE84FA /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				1F24642D1D31692100BE84FA /* RunTableViewCell.h */,
+				1F24642E1D31692100BE84FA /* RunTableViewCell.m */,
+			);
+			name = cells;
+			sourceTree = "<group>";
+		};
 		1F60172A1D22C43F00144C2B /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F24642C1D3168FF00BE84FA /* cells */,
 				1F60172B1D22C74500144C2B /* MasterViewController.m */,
 				1F60172C1D22C74500144C2B /* MasterViewController.h */,
 				1F60172D1D22C74500144C2B /* DetailViewController.m */,
@@ -527,6 +540,7 @@
 				1F60172F1D22C74500144C2B /* MasterViewController.m in Sources */,
 				1F844C671D2165D2002EC430 /* Run+CoreDataProperties.m in Sources */,
 				1F844C251D216098002EC430 /* main.m in Sources */,
+				1F24642F1D31692100BE84FA /* RunTableViewCell.m in Sources */,
 				1F64856C1D2470390019EB8A /* NewRunViewController.m in Sources */,
 				1F844C6D1D2165D2002EC430 /* User+CoreDataProperties.m in Sources */,
 			);

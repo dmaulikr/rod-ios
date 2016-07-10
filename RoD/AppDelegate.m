@@ -52,8 +52,8 @@
     
     
     // Initialize RestKit
-    // NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run"];
-    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
+     NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run"];
+    //NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
     
     RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:baseURL];
     

@@ -9,6 +9,7 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "NewRunViewController.h"
+#import "RunTableViewCell.h"
 
 #import <RestKit/CoreData.h>
 #import <RestKit/RestKit.h>
@@ -79,12 +80,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    RunTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Run" forIndexPath:indexPath];
     Run *run = self.runs[indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ Km", [run.distance stringValue]];
+    cell.distance_txt.text = [NSString stringWithFormat:@"%02.0f", [run.distance floatValue]];
+    cell.date_human_txt.text = run.datetime.timeAgoSinceNow;
+    //cell.pace_txt.text = run.pace;
+ 
+    float totalDistance = [run.distance floatValue];
+    float myKm = (int) totalDistance; //returns 5 feet
+    float myMeters = fmodf(totalDistance, myKm);
+    cell.decimal_distance_txt.text = [NSString stringWithFormat:@",%.0f", myMeters*10];
     
-    cell.detailTextLabel.text = run.datetime.timeAgoSinceNow;
+    
     return cell;
 }
 
@@ -140,6 +147,22 @@
 
     [self.tableView reloadData];
     
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+//    id cell = [tableView cellForRowAtIndexPath:indexPath];
+////    [cell isKindOfClass:[RunTableViewCell class]];
+//    
+    return 115;
+//    id cell = [tableView cellForRowAtIndexPath:indexPath];
+//    if () {
+//        
+//        return 110;
+//    } else {
+//        
+//        return 98;
+//    }
 }
 
 @end
