@@ -48,7 +48,7 @@
 
 
 - (void)awakeFromNib {
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor colorWithRed:0.271 green:0.012 blue:0.200 alpha:0.6];
     
     self.rightViewMode = UITextFieldViewModeAlways;
     self.leftViewMode = UITextFieldViewModeAlways;
@@ -62,8 +62,10 @@
     self.leftView = _leftViewHighlight;
     self.rightView = _rightViewHighlight;
     
-    self.backgroundColor = [UIColor clearColor];
-    _underlineLayer.backgroundColor = [UIColor colorWithRed:204/255.0 green:51/255.0 blue:51/255.0 alpha:1.0].CGColor;
+    self.backgroundColor = [UIColor colorWithRed:0.271 green:0.012 blue:0.200 alpha:1.00];
+
+    _underlineLayer.backgroundColor = [UIColor colorWithRed:1.000 green:0.416 blue:1.000 alpha:1.00].CGColor;
+    
 }
 
 - (void)textField_TouchUp:(UITextField *)txt {
@@ -71,7 +73,7 @@
     self.leftView = _leftViewNormal;
     self.rightView = _rightViewNormal;
     
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor colorWithRed:0.271 green:0.012 blue:0.200 alpha:0.6];
     _underlineLayer.backgroundColor = [UIColor whiteColor].CGColor;
 }
 
