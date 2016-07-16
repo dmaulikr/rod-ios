@@ -80,7 +80,7 @@
     }
     [tf_email resignFirstResponder];
     
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
 //    [httpClient postDataWithPath:URL_FORGOT_PASS andParam:@{@"email": tf_email.text} showFailureAlert:YES withBlock:^(id update) {
 //        [SVProgressHUD dismiss];
 //        if (update) {
