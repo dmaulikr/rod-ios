@@ -7,6 +7,9 @@ target 'RoD' do
     pod 'RestKit'
     pod 'DateTools' 
     pod "MagicalRecord" 
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
+    pod 'FBSDKShareKit'
 
   target 'RoDTests' do
     inherit! :search_paths

@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+  YoVideo
+
+  Created by Huyns89 on 3/11/15.
+  Copyright (c) 2015 Huyns. All rights reserved.
+*/
+
+"Holder book name"               = "Comic name";
+"New Books"                      = "Newest books";
+"New Stories"                    = "Newest comics";
+"Most Reading"                   = "Most read";
+"Highlights books"               = "Featured";
+"Highlights stories"             = "Featured comics";
+"Home"                      = "Home";
+"Books"                          = "Books";
+"Stories"                        = "Comics";
+"About us"                       = "About us";
+"Terms"                           = "Terms of service";
+"Share"                          = "Share";
+"Logout"                         = "Logout";
+"View count"                     = "Views";
+"Download count"                 = "Downloads";
+"Last modified"                  = "Last updated";
+"Done"                           = "Done";
+"of"                             = "of";
+"Continue"                       = "Continue";
+"TOS notice"                     = "Choose '\Continue'\ If you agree with our Terms of service";
+"User name empty warning"        = "Username must have between 6 to 30 characters";
+"Email empty warning"            = "Please provide a valid email";
+"Password empty warning"         = "Password needs minium 6 characters";
+"Confirm pass not same warning"  = "Password mistmatch.";
+"Email sent"                     = "Please enter the email you used to register. Check you email for the instruction to retreieve your password.";
+"Updating content"               = "not yet updated. Please come back another time";

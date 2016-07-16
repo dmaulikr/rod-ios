@@ -145,7 +145,7 @@
     }
     else
     {
-        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"login_vc"];
         UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
         
         self.window.rootViewController = navigation;

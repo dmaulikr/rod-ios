@@ -13,6 +13,7 @@
 
 #import <RestKit/CoreData.h>
 #import <RestKit/RestKit.h>
+#import <math.h>
 
 #import "Run.h"
 #import "User.h"
@@ -82,16 +83,21 @@
     
     RunTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Run" forIndexPath:indexPath];
     Run *run = self.runs[indexPath.row];
-    cell.distance_txt.text = [NSString stringWithFormat:@"%02.0f", [run.distance floatValue]];
     cell.date_human_txt.text = run.datetime.timeAgoSinceNow;
     //cell.pace_txt.text = run.pace;
  
     float totalDistance = [run.distance floatValue];
     float myKm = (int) totalDistance; //returns 5 feet
     float myMeters = fmodf(totalDistance, myKm);
-    cell.decimal_distance_txt.text = [NSString stringWithFormat:@",%.0f", myMeters*10];
     
-    
+    cell.distance_txt.text = [NSString stringWithFormat:@"%02.0f", myKm];
+
+    if (isnan(myMeters)) {
+        cell.decimal_distance_txt.text = [NSString stringWithFormat:@",%.0f", [run.distance floatValue]*10];
+    } else {
+        cell.decimal_distance_txt.text = [NSString stringWithFormat:@",%.0f", myMeters*10];
+    }
+
     return cell;
 }
 
@@ -108,12 +114,6 @@
 
     
     NSString *requestPath = [NSString stringWithFormat:@"/api/v1/users/%@?user_email=%@&user_token=%@", userId, userEmail, userToken];
-    
-//  Production
-//    NSString *requestPath = @"/api/v1/users/6?user_email=pedroanisio@gmail.com&user_token=2SyHaQrDMBj9EhZNKnNq";
-    
-// Development
-//    NSString *requestPath = @"/api/v1/users/7?user_email=runordieadm@gmail.com&user_token=-Ee48k2xe532wEJ3Uh4V";
     
     
     [[RKObjectManager sharedManager]
@@ -147,22 +147,6 @@
 
     [self.tableView reloadData];
     
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-//    id cell = [tableView cellForRowAtIndexPath:indexPath];
-////    [cell isKindOfClass:[RunTableViewCell class]];
-//    
-    return 115;
-//    id cell = [tableView cellForRowAtIndexPath:indexPath];
-//    if () {
-//        
-//        return 110;
-//    } else {
-//        
-//        return 98;
-//    }
 }
 
 @end

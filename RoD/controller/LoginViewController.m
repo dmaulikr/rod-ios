@@ -14,9 +14,7 @@
 
 
 @interface LoginViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *txtEmail;
-@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
-@property (weak, nonatomic) IBOutlet UILabel *msgAlert;
+@property (weak, nonatomic) IBOutlet UIButton *btnSignin;
 
 @end
 
@@ -24,13 +22,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.txtPassword.delegate = self;
+    
+    _btnSignin.layer.masksToBounds = YES;
+    _btnSignin.layer.cornerRadius = 25;
+    _btnSignin.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    _btnSignin.layer.shouldRasterize = YES;
+    _btnSignin.clipsToBounds = YES;
+    
+    txtEmail.leftViewNormal = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_about_us"]];
+    txtEmail.leftViewHighlight = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_about_us_p"]];
+    
+    txtPassword.leftViewNormal = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_lock"]];
+    txtPassword.leftViewHighlight = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_lock_p"]];
+    
+    UIButton * btnShowPass1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [btnShowPass1 setImage:[UIImage imageNamed:@"ic_view_n"] forState:UIControlStateNormal];
+    [btnShowPass1 addTarget:self action:@selector(btnShowPass_Click:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton * btnShowPass2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [btnShowPass2 setImage:[UIImage imageNamed:@"ic_view_p"] forState:UIControlStateNormal];
+    [btnShowPass2 addTarget:self action:@selector(btnShowPass_Click:) forControlEvents:UIControlEventTouchUpInside];
+    txtPassword.rightViewNormal = btnShowPass1;
+    txtPassword.rightViewHighlight = btnShowPass2;
+    
+    txtPassword.delegate = self;
     // Do any additional setup after loading the view.
 }
 
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self myLogin];
+    [self onLogin];
     return YES;
 }
 
@@ -38,9 +60,62 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)tryLogin:(id)sender {
-    self.msgAlert.text = @"apertou o botao";
-    [self myLogin];
+- (IBAction)onLogin:(id)sender {
+    
+    NSString *userName = txtEmail.text;
+    NSString *pass = txtPassword.text;
+    
+    if (userName.length <= 0) {
+        ALERT_WITH_TITLE(@"", NSLocalizedString(@"User name empty warning", nil));
+        return;
+    }
+    if (pass.length <= 0) {
+        ALERT_WITH_TITLE(@"", NSLocalizedString(@"Password empty warning", nil));
+        return;
+    }
+    if ([userName conTainSpecialCharaters] || [pass conTainSpecialCharaters]) {
+        ALERT_WITH_TITLE(@"",kMessageContainSpecialCharacters);
+        return;
+    }
+    
+    
+    //   NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
+    NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run/api/v1/"];
+    
+    
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    [httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [httpClient setDefaultHeader:@"Accept" value:@"application/json"];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            txtEmail.text, @"email",
+                            txtPassword.text, @"password",
+                            nil];
+    
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"sessions" parameters:params];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                            // Store the data
+                                                                                            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                                                                            
+                                                                                            [defaults setObject:txtEmail.text forKey:@"user_email"];
+                                                                                            [defaults setObject:[JSON objectForKey:@"auth_token"] forKey:@"user_token"];
+                                                                                            [defaults setObject:[JSON objectForKey:@"user_id"] forKey:@"user_id"];
+                                                                                            
+                                                                                            [defaults synchronize];
+                                                                                            [self pushAuthUserView];
+                                                                                            
+                                                                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                            NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
+                                                                                            NSLog(@"Failure");
+                                                                                            ALERT_WITH_TITLE(@"", NSLocalizedString(@"Wrong password or Invalid user", nil));
+
+                                                                                        }];
+    
+    [operation start];
+    [operation waitUntilFinished];
+    
+
 }
 
 -(void) myLogoff{
@@ -66,43 +141,7 @@
 
 }
 
--(void) myLogin {
-    
-
-    
- //   NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
-    NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run/api/v1/"];
-
-    
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
-    [httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    [httpClient setDefaultHeader:@"Accept" value:@"application/json"];
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            self.txtEmail.text, @"email",
-                            self.txtPassword.text, @"password",
-                            nil];
-    
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"sessions" parameters:params];
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                                                            // Store the data
-                                                                                            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                                                                                            
-                                                                                            [defaults setObject:self.txtEmail.text forKey:@"user_email"];
-                                                                                            [defaults setObject:[JSON objectForKey:@"auth_token"] forKey:@"user_token"];
-                                                                                            [defaults setObject:[JSON objectForKey:@"user_id"] forKey:@"user_id"];
-                                                                                            
-                                                                                            [defaults synchronize];
-                                                                                            [self pushAuthUserView];
-                                                                                                                                                                                        
-                                                                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                                                                                            NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
-                                                                                            NSLog(@"Failure");
-                                                                                        }];
-    
-    [operation start];
-    [operation waitUntilFinished];
+-(void) onLogin {
     
 
     
@@ -124,5 +163,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - util methods
+- (void)btnShowPass_Click:(UIButton *)sender {
+    txtPassword.secureTextEntry = !txtPassword.secureTextEntry;
+}
 
 @end

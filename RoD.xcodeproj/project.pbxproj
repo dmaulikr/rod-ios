@@ -8,10 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		1DE215CD1F4A3E95E0E820F2 /* libPods-RoD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 588251B957195DD6B1BCAEE7 /* libPods-RoD.a */; };
+		1F172F1B1D3A69DD00C12AAA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F172F191D3A69DD00C12AAA /* LoginViewController.m */; };
+		1F172F1F1D3A892A00C12AAA /* NSString+EmojiExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F172F1E1D3A892A00C12AAA /* NSString+EmojiExtension.m */; };
+		1F172F241D3A89A000C12AAA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F172F261D3A89A000C12AAA /* Localizable.strings */; };
+		1F172F2A1D3A8A0100C12AAA /* constant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F172F291D3A8A0100C12AAA /* constant.m */; };
+		1F172F2D1D3A8DAB00C12AAA /* ForgotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F172F2C1D3A8DAB00C12AAA /* ForgotViewController.m */; };
+		1F172F311D3A8EE700C12AAA /* UtilMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F172F301D3A8EE700C12AAA /* UtilMethods.m */; };
 		1F24642F1D31692100BE84FA /* RunTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F24642E1D31692100BE84FA /* RunTableViewCell.m */; };
+		1F24EDBF1D39C28200169546 /* PaddingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F24EDBE1D39C28200169546 /* PaddingTextField.m */; };
+		1F24EDC21D39C2DF00169546 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F24EDC11D39C2DF00169546 /* BaseViewController.m */; };
 		1F60172F1D22C74500144C2B /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F60172B1D22C74500144C2B /* MasterViewController.m */; };
 		1F6017301D22C74500144C2B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F60172D1D22C74500144C2B /* DetailViewController.m */; };
-		1F6017331D22CBD000144C2B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6017321D22CBD000144C2B /* LoginViewController.m */; };
 		1F6485251D243E690019EB8A /* RoD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6485241D243E690019EB8A /* RoD.storyboard */; };
 		1F6485691D244CEA0019EB8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6485681D244CEA0019EB8A /* Main.storyboard */; };
 		1F64856C1D2470390019EB8A /* NewRunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64856B1D2470390019EB8A /* NewRunViewController.m */; };
@@ -58,14 +65,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F172F191D3A69DD00C12AAA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		1F172F1A1D3A69DD00C12AAA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		1F172F1C1D3A88AA00C12AAA /* rod-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rod-prefix.pch"; sourceTree = "<group>"; };
+		1F172F1D1D3A892A00C12AAA /* NSString+EmojiExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EmojiExtension.h"; sourceTree = "<group>"; };
+		1F172F1E1D3A892A00C12AAA /* NSString+EmojiExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EmojiExtension.m"; sourceTree = "<group>"; };
+		1F172F251D3A89A000C12AAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1F172F271D3A89A400C12AAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1F172F281D3A8A0100C12AAA /* constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constant.h; sourceTree = "<group>"; };
+		1F172F291D3A8A0100C12AAA /* constant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = constant.m; sourceTree = "<group>"; };
+		1F172F2B1D3A8DAB00C12AAA /* ForgotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotViewController.h; sourceTree = "<group>"; };
+		1F172F2C1D3A8DAB00C12AAA /* ForgotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotViewController.m; sourceTree = "<group>"; };
+		1F172F2F1D3A8EE700C12AAA /* UtilMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilMethods.h; sourceTree = "<group>"; };
+		1F172F301D3A8EE700C12AAA /* UtilMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilMethods.m; sourceTree = "<group>"; };
 		1F24642D1D31692100BE84FA /* RunTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunTableViewCell.h; sourceTree = "<group>"; };
 		1F24642E1D31692100BE84FA /* RunTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunTableViewCell.m; sourceTree = "<group>"; };
+		1F24EDBD1D39C28200169546 /* PaddingTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddingTextField.h; sourceTree = "<group>"; };
+		1F24EDBE1D39C28200169546 /* PaddingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaddingTextField.m; sourceTree = "<group>"; };
+		1F24EDC01D39C2DF00169546 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		1F24EDC11D39C2DF00169546 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		1F60172B1D22C74500144C2B /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		1F60172C1D22C74500144C2B /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		1F60172D1D22C74500144C2B /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		1F60172E1D22C74500144C2B /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		1F6017311D22CBD000144C2B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		1F6017321D22CBD000144C2B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		1F6485241D243E690019EB8A /* RoD.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RoD.storyboard; sourceTree = "<group>"; };
 		1F6485681D244CEA0019EB8A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		1F64856A1D2470390019EB8A /* NewRunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRunViewController.h; sourceTree = "<group>"; };
@@ -131,6 +153,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F172F2E1D3A8EDE00C12AAA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1F172F2F1D3A8EE700C12AAA /* UtilMethods.h */,
+				1F172F301D3A8EE700C12AAA /* UtilMethods.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		1F24642C1D3168FF00BE84FA /* cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,33 +171,62 @@
 			name = cells;
 			sourceTree = "<group>";
 		};
-		1F60172A1D22C43F00144C2B /* controller */ = {
+		1F24EDBC1D39C27000169546 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				1F172F2E1D3A8EDE00C12AAA /* Utils */,
+				1F172F281D3A8A0100C12AAA /* constant.h */,
+				1F172F291D3A8A0100C12AAA /* constant.m */,
+				1F172F1D1D3A892A00C12AAA /* NSString+EmojiExtension.h */,
+				1F172F1E1D3A892A00C12AAA /* NSString+EmojiExtension.m */,
+				1F24EDBD1D39C28200169546 /* PaddingTextField.h */,
+				1F24EDBE1D39C28200169546 /* PaddingTextField.m */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
+		1F3BA30E1D396946001CA8BD /* LoginVC */ = {
+			isa = PBXGroup;
+			children = (
+				1F172F2B1D3A8DAB00C12AAA /* ForgotViewController.h */,
+				1F172F2C1D3A8DAB00C12AAA /* ForgotViewController.m */,
+				1F172F191D3A69DD00C12AAA /* LoginViewController.m */,
+				1F172F1A1D3A69DD00C12AAA /* LoginViewController.h */,
+			);
+			name = LoginVC;
+			sourceTree = "<group>";
+		};
+		1F60172A1D22C43F00144C2B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F24EDC01D39C2DF00169546 /* BaseViewController.h */,
+				1F24EDC11D39C2DF00169546 /* BaseViewController.m */,
+				1F3BA30E1D396946001CA8BD /* LoginVC */,
 				1F24642C1D3168FF00BE84FA /* cells */,
 				1F60172B1D22C74500144C2B /* MasterViewController.m */,
 				1F60172C1D22C74500144C2B /* MasterViewController.h */,
 				1F60172D1D22C74500144C2B /* DetailViewController.m */,
 				1F60172E1D22C74500144C2B /* DetailViewController.h */,
-				1F6017311D22CBD000144C2B /* LoginViewController.h */,
-				1F6017321D22CBD000144C2B /* LoginViewController.m */,
 				1F64856A1D2470390019EB8A /* NewRunViewController.h */,
 				1F64856B1D2470390019EB8A /* NewRunViewController.m */,
 			);
+			name = Controller;
 			path = controller;
 			sourceTree = "<group>";
 		};
-		1F6485231D243E2E0019EB8A /* view */ = {
+		1F6485231D243E2E0019EB8A /* View */ = {
 			isa = PBXGroup;
 			children = (
 				1F6485241D243E690019EB8A /* RoD.storyboard */,
 			);
+			name = View;
 			path = view;
 			sourceTree = "<group>";
 		};
 		1F844C171D216098002EC430 = {
 			isa = PBXGroup;
 			children = (
+				1F172F1C1D3A88AA00C12AAA /* rod-prefix.pch */,
 				1F844C221D216098002EC430 /* RoD */,
 				1F844C3F1D216098002EC430 /* RoDTests */,
 				1F844C4A1D216098002EC430 /* RoDUITests */,
@@ -189,11 +249,13 @@
 		1F844C221D216098002EC430 /* RoD */ = {
 			isa = PBXGroup;
 			children = (
-				1F6485231D243E2E0019EB8A /* view */,
-				1F60172A1D22C43F00144C2B /* controller */,
-				1F844C591D216152002EC430 /* model */,
+				1F24EDBC1D39C27000169546 /* Lib */,
+				1F6485231D243E2E0019EB8A /* View */,
+				1F60172A1D22C43F00144C2B /* Controller */,
+				1F844C591D216152002EC430 /* Model */,
 				1F844C261D216098002EC430 /* AppDelegate.h */,
 				1F844C271D216098002EC430 /* AppDelegate.m */,
+				1F172F261D3A89A000C12AAA /* Localizable.strings */,
 				1F6485681D244CEA0019EB8A /* Main.storyboard */,
 				1F844C321D216098002EC430 /* Assets.xcassets */,
 				1F844C341D216098002EC430 /* LaunchScreen.storyboard */,
@@ -229,7 +291,7 @@
 			path = RoDUITests;
 			sourceTree = "<group>";
 		};
-		1F844C591D216152002EC430 /* model */ = {
+		1F844C591D216152002EC430 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				1F844C5A1D2161B6002EC430 /* DataModel.xcdatamodeld */,
@@ -242,6 +304,7 @@
 				1F844C651D2165D2002EC430 /* User.h */,
 				1F844C661D2165D2002EC430 /* User.m */,
 			);
+			name = Model;
 			path = model;
 			sourceTree = "<group>";
 		};
@@ -380,6 +443,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F172F241D3A89A000C12AAA /* Localizable.strings in Resources */,
 				1F844C361D216098002EC430 /* LaunchScreen.storyboard in Resources */,
 				1F844C331D216098002EC430 /* Assets.xcassets in Resources */,
 				1F6485251D243E690019EB8A /* RoD.storyboard in Resources */,
@@ -534,15 +598,21 @@
 				1F844C281D216098002EC430 /* AppDelegate.m in Sources */,
 				1F844C5C1D2161B6002EC430 /* DataModel.xcdatamodeld in Sources */,
 				1F6017301D22C74500144C2B /* DetailViewController.m in Sources */,
+				1F172F1F1D3A892A00C12AAA /* NSString+EmojiExtension.m in Sources */,
 				1F844C701D2165D2002EC430 /* User.m in Sources */,
-				1F6017331D22CBD000144C2B /* LoginViewController.m in Sources */,
 				1F844C6A1D2165D2002EC430 /* Run.m in Sources */,
+				1F24EDC21D39C2DF00169546 /* BaseViewController.m in Sources */,
 				1F60172F1D22C74500144C2B /* MasterViewController.m in Sources */,
 				1F844C671D2165D2002EC430 /* Run+CoreDataProperties.m in Sources */,
 				1F844C251D216098002EC430 /* main.m in Sources */,
 				1F24642F1D31692100BE84FA /* RunTableViewCell.m in Sources */,
+				1F172F1B1D3A69DD00C12AAA /* LoginViewController.m in Sources */,
+				1F172F311D3A8EE700C12AAA /* UtilMethods.m in Sources */,
+				1F24EDBF1D39C28200169546 /* PaddingTextField.m in Sources */,
 				1F64856C1D2470390019EB8A /* NewRunViewController.m in Sources */,
+				1F172F2D1D3A8DAB00C12AAA /* ForgotViewController.m in Sources */,
 				1F844C6D1D2165D2002EC430 /* User+CoreDataProperties.m in Sources */,
+				1F172F2A1D3A8A0100C12AAA /* constant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +658,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1F172F261D3A89A000C12AAA /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F172F251D3A89A000C12AAA /* en */,
+				1F172F271D3A89A400C12AAA /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		1F844C341D216098002EC430 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -686,6 +765,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/rod-prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -714,6 +794,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/rod-prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

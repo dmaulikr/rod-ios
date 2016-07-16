@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "PaddingTextField.h"
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController {
+
+    __weak IBOutlet PaddingTextField *txtEmail;
+    __weak IBOutlet PaddingTextField *txtPassword;
+}
+
+
 
 @end
