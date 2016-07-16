@@ -7,6 +7,7 @@
 //
 
 #import "ForgotViewController.h"
+#import "AFNetworking.h"
 
 @interface ForgotViewController () <UITextFieldDelegate>
 
@@ -81,17 +82,39 @@
     [tf_email resignFirstResponder];
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-//    [httpClient postDataWithPath:URL_FORGOT_PASS andParam:@{@"email": tf_email.text} showFailureAlert:YES withBlock:^(id update) {
-//        [SVProgressHUD dismiss];
-//        if (update) {
-//            ALERT_WITH_TITLE(@"", update[@"message"]);
-//        }
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.navigationController popToRootViewControllerAnimated:YES];
-//        });
-//    } withFailBlock:^(id fail) {
-//        [SVProgressHUD dismiss];
-//    }];
+    
+    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
+    //NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run/api/v1/"];
+    
+    
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+    [httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [httpClient setDefaultHeader:@"Accept" value:@"application/json"];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            tf_email.text, @"user[email]",
+                            nil];
+    
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"password" parameters:params];
+    
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                            // Action bellow
+
+                                                                                            [SVProgressHUD dismiss];
+                                                                                            ALERT_WITH_TITLE(@"", NSLocalizedString(@"Please follow the instructions in your email", nil));
+                                                                                            
+                                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                                [self.navigationController popToRootViewControllerAnimated:YES];
+                                                                                            });
+                                                                                            
+                                                                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                            [SVProgressHUD dismiss];
+                                                                                            ALERT_WITH_TITLE(@"", NSLocalizedString(@"Email not found", nil));
+                                                                                            
+                                                                                        }];
+    
+    [operation start];
+    [operation waitUntilFinished];
     
 }
 
