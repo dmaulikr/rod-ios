@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.hidden = YES;
     // Do any additional setup after loading the view.
 //    tf_email.layer.cornerRadius = 2;
 //    tf_email.layer.borderColor = [[UIColor colorFromHexString:@"#ccccce"] CGColor];

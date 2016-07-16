@@ -50,7 +50,6 @@
     
     [MagicalRecord enableShorthandMethods];
     
-    
     // Initialize RestKit
      NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run"];
     //NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
@@ -138,16 +137,12 @@
     {
         self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
         
-        //        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-        //        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        //        navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
-        //        splitViewController.delegate = self;
     }
     else
     {
         UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"login_vc"];
         UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
-        
+                
         self.window.rootViewController = navigation;
     }
     

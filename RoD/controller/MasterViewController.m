@@ -115,6 +115,7 @@
     
     NSString *requestPath = [NSString stringWithFormat:@"/api/v1/users/%@?user_email=%@&user_token=%@", userId, userEmail, userToken];
     
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     
     [[RKObjectManager sharedManager]
      getObjectsAtPath:requestPath
@@ -122,8 +123,14 @@
      success: ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
          //runs have been saved in core data by now
          [self fetchRunsFromContext];
+         [SVProgressHUD dismiss];
+
      }
      failure: ^(RKObjectRequestOperation *operation, NSError *error) {
+         [SVProgressHUD dismiss];
+
+         ALERT_WITH_TITLE(@"", NSLocalizedString(@"Error while loading runs", nil));
+
          RKLogError(@"Load failed with error: %@", error);
      }
      ];

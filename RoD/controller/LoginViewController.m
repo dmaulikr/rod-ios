@@ -20,9 +20,13 @@
 
 @implementation LoginViewController
 
+- (void) viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        
     _btnSignin.layer.masksToBounds = YES;
     _btnSignin.layer.cornerRadius = 25;
     _btnSignin.layer.rasterizationScale = [UIScreen mainScreen].scale;
@@ -78,6 +82,8 @@
         return;
     }
     
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+
     
     //   NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
     NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run/api/v1/"];
@@ -103,11 +109,13 @@
                                                                                             [defaults setObject:[JSON objectForKey:@"user_id"] forKey:@"user_id"];
                                                                                             
                                                                                             [defaults synchronize];
+                                                                                            [SVProgressHUD dismiss];
                                                                                             [self pushAuthUserView];
                                                                                             
                                                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                                                             NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
                                                                                             NSLog(@"Failure");
+                                                                                            [SVProgressHUD dismiss];
                                                                                             ALERT_WITH_TITLE(@"", NSLocalizedString(@"Wrong password or Invalid user", nil));
 
                                                                                         }];
@@ -118,28 +126,7 @@
 
 }
 
--(void) myLogoff{
-    
-    // Cancel any network operations and clear the cache
-    [[RKObjectManager sharedManager].operationQueue cancelAllOperations];
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    
-    // Cancel any object mapping in the response mapping queue
-    [[RKObjectRequestOperation responseMappingQueue] cancelAllOperations];
-    
-    // Reset persistent stores
-    [[RKManagedObjectStore defaultStore] resetPersistentStores:nil];
-    
-    // Store the data
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults removeObjectForKey:@"user_email"];
-    [defaults removeObjectForKey:@"user_token"];
-    [defaults removeObjectForKey:@"user_id"];
-    
-    [defaults synchronize];
 
-}
 
 -(void) onLogin {
     
