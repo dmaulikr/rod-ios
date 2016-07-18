@@ -18,6 +18,7 @@
 		1F24EDBF1D39C28200169546 /* PaddingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F24EDBE1D39C28200169546 /* PaddingTextField.m */; };
 		1F24EDC21D39C2DF00169546 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F24EDC11D39C2DF00169546 /* BaseViewController.m */; };
 		1F4E17481D3AED1D001BA82D /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E17471D3AED1D001BA82D /* MeViewController.m */; };
+		1F5C4FF51D3D172F0035CB5A /* NSDate+TCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C4FF41D3D172F0035CB5A /* NSDate+TCUtils.m */; };
 		1F60172F1D22C74500144C2B /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F60172B1D22C74500144C2B /* MasterViewController.m */; };
 		1F6017301D22C74500144C2B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F60172D1D22C74500144C2B /* DetailViewController.m */; };
 		1F6485251D243E690019EB8A /* RoD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F6485241D243E690019EB8A /* RoD.storyboard */; };
@@ -87,6 +88,8 @@
 		1F24EDC11D39C2DF00169546 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		1F4E17461D3AED1D001BA82D /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		1F4E17471D3AED1D001BA82D /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
+		1F5C4FF31D3D172F0035CB5A /* NSDate+TCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TCUtils.h"; sourceTree = "<group>"; };
+		1F5C4FF41D3D172F0035CB5A /* NSDate+TCUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TCUtils.m"; sourceTree = "<group>"; };
 		1F60172B1D22C74500144C2B /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		1F60172C1D22C74500144C2B /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		1F60172D1D22C74500144C2B /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
@@ -159,6 +162,8 @@
 		1F172F2E1D3A8EDE00C12AAA /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1F5C4FF31D3D172F0035CB5A /* NSDate+TCUtils.h */,
+				1F5C4FF41D3D172F0035CB5A /* NSDate+TCUtils.m */,
 				1F172F2F1D3A8EE700C12AAA /* UtilMethods.h */,
 				1F172F301D3A8EE700C12AAA /* UtilMethods.m */,
 			);
@@ -208,9 +213,19 @@
 			name = Me;
 			sourceTree = "<group>";
 		};
+		1F5C4FEF1D3D02A00035CB5A /* AddRun */ = {
+			isa = PBXGroup;
+			children = (
+				1F64856A1D2470390019EB8A /* NewRunViewController.h */,
+				1F64856B1D2470390019EB8A /* NewRunViewController.m */,
+			);
+			name = AddRun;
+			sourceTree = "<group>";
+		};
 		1F60172A1D22C43F00144C2B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F5C4FEF1D3D02A00035CB5A /* AddRun */,
 				1F4E17451D3AECE5001BA82D /* Me */,
 				1F24EDC01D39C2DF00169546 /* BaseViewController.h */,
 				1F24EDC11D39C2DF00169546 /* BaseViewController.m */,
@@ -220,8 +235,6 @@
 				1F60172C1D22C74500144C2B /* MasterViewController.h */,
 				1F60172D1D22C74500144C2B /* DetailViewController.m */,
 				1F60172E1D22C74500144C2B /* DetailViewController.h */,
-				1F64856A1D2470390019EB8A /* NewRunViewController.h */,
-				1F64856B1D2470390019EB8A /* NewRunViewController.m */,
 			);
 			name = Controller;
 			path = controller;
@@ -625,6 +638,7 @@
 				1F24EDBF1D39C28200169546 /* PaddingTextField.m in Sources */,
 				1F64856C1D2470390019EB8A /* NewRunViewController.m in Sources */,
 				1F172F2D1D3A8DAB00C12AAA /* ForgotViewController.m in Sources */,
+				1F5C4FF51D3D172F0035CB5A /* NSDate+TCUtils.m in Sources */,
 				1F844C6D1D2165D2002EC430 /* User+CoreDataProperties.m in Sources */,
 				1F172F2A1D3A8A0100C12AAA /* constant.m in Sources */,
 			);
@@ -780,6 +794,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/rod-prefix.pch";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"DEVEL=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -809,6 +828,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/rod-prefix.pch";
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"DEVEL=0",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

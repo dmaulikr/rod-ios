@@ -42,7 +42,6 @@
     } else {
         return FALSE;
     }
-    
 }
 
 
@@ -51,8 +50,7 @@
     [MagicalRecord enableShorthandMethods];
     
     // Initialize RestKit
-     NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run"];
-    //NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000"];
+     NSURL *baseURL = [NSURL URLWithString:ENDPOINT_URL];
     
     RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:baseURL];
     

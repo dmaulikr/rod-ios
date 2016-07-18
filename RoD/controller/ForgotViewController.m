@@ -84,8 +84,7 @@
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     
-    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:3000/api/v1/"];
-    //NSURL *baseURL = [NSURL URLWithString:@"http://app.runordie.run/api/v1/"];
+    NSURL *baseURL = [NSURL URLWithString:ENDPOINT_URL];
     
     
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
@@ -95,7 +94,7 @@
                             tf_email.text, @"user[email]",
                             nil];
     
-    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"password" parameters:params];
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" path:@"/api/v1/password" parameters:params];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {

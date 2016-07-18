@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ActionSheetPicker-3.0.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -87,11 +92,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>07AE22770AD6055059AAFEAE39715774</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>080AF914A09167DB5759A733917B840F</key>
 		<dict>
 			<key>primary</key>
@@ -102,7 +102,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>18241D0BE8B68EE7B1D3D86193E826D1</key>
+		<key>249B41175B89BC8FA1E98E15DF0619D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,22 +112,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>338ED3A6952A30718F806DAEC0B99643</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>38513A8E214F61A4B5264C0BFB9D2611</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>61681BF0E677683490353B846C61A129</key>
+		<key>4C36B1F5D992ACDFD781AFC537E2D4B2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6335C26AF6B07A2252E68E315D5B223A</key>
+		<key>61681BF0E677683490353B846C61A129</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,7 +137,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>90BC91E7A8CA674DA3C339FA6920A162</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>998F11DE1C16344F75569DD538E8A6D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3D1DAC3127038848158027BB854AAF4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,12 +162,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D217A6E3334131D49BB27C0667C67634</key>
+		<key>C7002188A060F395A9943C1FCE88608F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>D54AB3ECEB9A8FBA15D4F73CBE326692</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E3D7251F8E8F11C1E1AB8CCC81571BE6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

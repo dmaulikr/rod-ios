@@ -62,7 +62,7 @@
     
     if ([[segue identifier] isEqualToString:@"addRun"]) {
         NewRunViewController *controller = (NewRunViewController *)[segue destinationViewController];
-        controller.delegate = self;
+//        controller.delegate = self;
         
     }
 }

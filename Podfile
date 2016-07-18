@@ -11,6 +11,8 @@ target 'RoD' do
     pod 'FBSDKLoginKit'
     pod 'FBSDKShareKit'
     pod 'SVProgressHUD'
+    pod 'ActionSheetPicker-3.0'
+
 
   target 'RoDTests' do
     inherit! :search_paths

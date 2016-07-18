@@ -9,10 +9,30 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Bolts.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
 		<key>DateTools.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+		<key>FBSDKCoreKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>FBSDKLoginKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
+		<key>FBSDKShareKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
 		</dict>
 		<key>ISO8601DateFormatterValueTransformer.xcscheme</key>
 		<dict>
@@ -54,6 +74,11 @@
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
+		<key>SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
 		<key>TransitionKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -67,12 +92,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>07AE22770AD6055059AAFEAE39715774</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>080AF914A09167DB5759A733917B840F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>0C1F8E331232C34F034FD26C684AFA0A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1608672C858F126362D248C261A78271</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>18241D0BE8B68EE7B1D3D86193E826D1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,6 +123,11 @@
 			<true/>
 		</dict>
 		<key>31FF44B5E2FF8CF00090950A8B67AFF6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>338ED3A6952A30718F806DAEC0B99643</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,12 +147,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6335C26AF6B07A2252E68E315D5B223A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>672D100D5DBCE0BF64E232E7F1D11BB7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6E7B2CF2F9D161E4DB2C0174D7A3D9CA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>744325C5351DDC84B8305B407BB18E30</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7E61C9A8C176278C6C99C2C59E9C152E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,7 +187,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C43DEF8E5BFEC36D943258BA3F21834D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C47E006176ABF4755350B88C088C3F0D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D217A6E3334131D49BB27C0667C67634</key>
 		<dict>
 			<key>primary</key>
 			<true/>

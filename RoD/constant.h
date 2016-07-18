@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef DEVEL
+#define ENDPOINT_URL @"http://localhost:3000"
+#elif defined(STAGING)
+#define ENDPOINT_URL @"http://stagingserver:8080/EndPoint"
+#else
+#define ENDPOINT_URL @"http://app.runordie.run"
+#endif
+
 #define base_url  @"http://test.inspius.com/yovideo/api"
 
 #define URL_LOGIN             @"login"
@@ -90,6 +98,7 @@ typedef enum : NSUInteger {
 
 #define kTimeIntervalForAds 180
 
+#define kDateTimePicked    @"picker_status"
 #define kUserLoginStatus    @"user_login_status"
 #define kLastTimeGetBookCategory    @"last_time_get_book_categories"
 #define kLastTimeGetMangaCategory   @"last_time_get_manga_categories"
@@ -107,6 +116,11 @@ typedef enum : NSUInteger {
 FOUNDATION_EXPORT NSString *const SubMenuTypeSach;
 FOUNDATION_EXPORT NSString *const SubMenuTypeTruyen;
 FOUNDATION_EXPORT NSString *const StringPublishActionPermission;
+
+typedef enum : NSUInteger {
+    DATETIME_PICKED = -1,
+    DATETIME_NOT_PICKED = 1
+} DATETIME_PICKER;
 
 @interface constant : NSObject
 
