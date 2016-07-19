@@ -12,7 +12,8 @@ target 'RoD' do
     pod 'FBSDKShareKit'
     pod 'SVProgressHUD'
     pod 'ActionSheetPicker-3.0'
-
+    pod "QBImagePickerController"
+    pod 'TOCropViewController'
 
   target 'RoDTests' do
     inherit! :search_paths

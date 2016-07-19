@@ -12,11 +12,11 @@
 #import "Run.h"
 #import "User.h"
 #import <MagicalRecord/MagicalRecord.h>
+#import <QBImagePickerController/QBImagePickerController.h>
+#import "TOCropViewController.h"
 
 @interface NewRunViewController ()
 - (void)dateWasSelected:(NSDate *)selectedDate element:(id)element;
-
-
 
 @end
 
@@ -169,13 +169,11 @@
     // POST to create
     [[RKObjectManager sharedManager] postObject:newRun path:requestPath parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         [SVProgressHUD dismiss];
-        [self.navigationController dismissViewControllerAnimated:NO completion:nil];
-
+        [self.navigationController popViewControllerAnimated:YES];
 
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
     }];
-
 }
 
 -(void) setLabel:(NSString*)label toUIButton:(UIButton*)button {
@@ -184,46 +182,6 @@
     
 }
 
-- (void)removeViews:(id)object {
-    [[self.view viewWithTag:9] removeFromSuperview];
-    [[self.view viewWithTag:10] removeFromSuperview];
-    [[self.view viewWithTag:11] removeFromSuperview];
-}
-
-- (void)dismissDatePicker:(id)sender {
-    CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height, 320, 44);
-    CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height+44, 320, 216);
-    [UIView beginAnimations:@"MoveOut" context:nil];
-    [self.view viewWithTag:9].alpha = 0;
-    [self.view viewWithTag:10].frame = datePickerTargetFrame;
-    [self.view viewWithTag:11].frame = toolbarTargetFrame;
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(removeViews:)];
-    [UIView commitAnimations];
-}
-
-- (void)hsDatePickerPickedDate:(NSDate *)date {
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy' 'HH:mm:ssZ"];
-    NSString *dateString = [dateFormatter stringFromDate:date];
-
-}
-- (IBAction)durationPicker:(UIButton *)sender {
-    NSArray *colors = [NSArray arrayWithObjects:@"Red", @"Green", @"Blue", @"Orange", nil];
-    
-    [ActionSheetStringPicker showPickerWithTitle:@"Select a Color"
-                                            rows:colors
-                                initialSelection:0
-                                       doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                                           NSLog(@"Picker: %@, Index: %@, value: %@",
-                                                 picker, selectedIndex, selectedValue);
-                                       }
-                                     cancelBlock:^(ActionSheetStringPicker *picker) {
-                                         NSLog(@"Block Picker Canceled");
-                                     }
-                                          origin:sender];
-}
 
 -(NSDate*) dateFromNSString:(NSString *)dateString {
     
@@ -273,8 +231,6 @@
 }
 
 
-
-
 - (IBAction)selectADate:(id)sender {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     [calendar setTimeZone: [NSTimeZone systemTimeZone]];
@@ -298,9 +254,7 @@
 
 - (void)dateWasSelected:(NSDate *)selectedDate element:(id)element {
     self.runDateAndTime = selectedDate;
-    
-    //may have originated from textField or barButtonItem, use an IBOutlet instead of element
-    
+
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY-MM-dd HH:MM:SS"];
     dateFormatter.timeZone = [NSTimeZone systemTimeZone];
@@ -422,4 +376,120 @@
         default:break;
     }
 }
+- (IBAction)cameraTap:(id)sender {
+    
+    //Show action sheet for selecting photo source
+    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Please select photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take a photo", @"choose from library", nil];
+    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [popupQuery showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if (buttonIndex == 0) {
+        
+        [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
+        
+    }
+    
+    if (buttonIndex == 1) {
+        
+        [self launchImagePickerViewController];
+        
+    }
+    
+    if (buttonIndex == 2) {
+        
+    }
+}
+
+- (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didSelectAsset:(PHAsset *)asset {
+    NSLog(@"selecionou");
+}
+
+
+-(void) launchImagePickerViewController {
+    QBImagePickerController *imagePickerController = [QBImagePickerController new]; imagePickerController.delegate = self;
+    imagePickerController.showsNumberOfSelectedAssets = YES;
+
+    [self presentViewController:imagePickerController animated:YES completion:NULL];
+}
+
+- (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingAssets:(NSArray *)assets {
+    
+    PHImageRequestOptions* requestOptions = [[PHImageRequestOptions alloc] init];
+    requestOptions.resizeMode   = PHImageRequestOptionsResizeModeExact;
+    requestOptions.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    
+    // this one is key
+    requestOptions.synchronous = true;
+    
+    PHImageManager *manager = [PHImageManager defaultManager];
+    NSMutableArray *images = [NSMutableArray arrayWithCapacity:[assets count]];
+    
+    // assets contains PHAsset objects.
+    __block UIImage *ima;
+    
+    for (PHAsset *asset in assets) {
+        // Do something with the asset
+        
+        [manager requestImageForAsset:asset
+                           targetSize:PHImageManagerMaximumSize
+                          contentMode:PHImageContentModeDefault
+                              options:requestOptions
+                        resultHandler:^void(UIImage *image, NSDictionary *info) {
+                            ima = image;
+                            
+                            [images addObject:ima];
+                        }];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+ 
+    TOCropViewController *cropViewController = [[TOCropViewController alloc] initWithImage:[images objectAtIndex:0]];
+    cropViewController.delegate = self;
+    [self presentViewController:cropViewController animated:YES completion:nil];
+    
+}
+
+- (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
+{
+    
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    //imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.sourceType = sourceType;
+    imagePickerController.delegate = self;
+    
+    if (sourceType == UIImagePickerControllerSourceTypeCamera)
+    {
+        /*
+         The user wants to use the camera interface. Set up our custom overlay view for the camera.
+         */
+        imagePickerController.showsCameraControls = YES;
+        
+        
+    }
+//    
+//    self.imagePickerController = imagePickerController;
+//    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+//    
+}
+
+- (void)cropViewController:(TOCropViewController *)cropViewController didCropToImage:(UIImage *)image withRect:(CGRect)cropRect angle:(NSInteger)angle
+{
+    // 'image' is the newly cropped version of the original image
+    
+    self.runImage.contentMode = UIViewContentModeScaleAspectFit;
+    self.runImage.clipsToBounds = YES;
+    self.runImage.image = image;
+
+    [self dismissViewControllerAnimated:YES completion:NULL];
+
+}
+
 @end

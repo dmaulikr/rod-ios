@@ -35,7 +35,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+}
+
+-(void) viewWillAppear:(BOOL)animated {
     [self requestData];
 }
 
@@ -111,8 +113,6 @@
     NSString *userToken = [defaults objectForKey:@"user_token"];
     NSString *userEmail = [defaults objectForKey:@"user_email"];
     NSString *userId    = [defaults objectForKey:@"user_id"];
-
-    
     NSString *requestPath = [NSString stringWithFormat:@"/api/v1/users/%@?user_email=%@&user_token=%@", userId, userEmail, userToken];
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
@@ -152,7 +152,8 @@
     NSSortDescriptor *dateSort = [NSSortDescriptor sortDescriptorWithKey:@"datetime" ascending:NO];
     self.runs = [[user.runs allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:dateSort]];
 
-    [self.tableView reloadData];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+
     
 }
 

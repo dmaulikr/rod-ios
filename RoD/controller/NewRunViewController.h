@@ -27,6 +27,7 @@
     NSArray *hourLabel;
 }
 @property (strong, nonatomic) AbstractActionSheetPicker *actionSheetPicker;
+@property (weak, nonatomic) IBOutlet UIImageView *runImage;
 @property (weak, nonatomic) IBOutlet UIButton *btnDateTime;
 @property (weak, nonatomic) IBOutlet UIButton *btnDuration;
 @property (weak, nonatomic) IBOutlet UIButton *btnDistance;
