@@ -13,7 +13,6 @@
 #import "User.h"
 #import <MagicalRecord/MagicalRecord.h>
 #import <QBImagePickerController/QBImagePickerController.h>
-#import "TOCropViewController.h"
 
 @interface NewRunViewController ()
 - (void)dateWasSelected:(NSDate *)selectedDate element:(id)element;
@@ -26,7 +25,7 @@
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-    self.runDateAndTime = [NSDate date];
+        
     _btnDateTime.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _btnDuration.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _btnDistance.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -83,6 +82,20 @@
 }
 */
 
+
+-(NSString *) randomFileName:(int)len withExtension: (NSString*)extension {
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
+    }
+    
+    return [NSString stringWithFormat:@"%@.%@",randomString,extension];
+}
+
+
 - (IBAction)doPostRun:(id)sender {
     
     if ([self.runDistance floatValue] == 0) {
@@ -94,6 +107,8 @@
         return;
     }
     
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    
     // Log all HTTP traffic with request and response bodies
     RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
     
@@ -101,7 +116,6 @@
     RKLogConfigureByName("RestKit/CoreData", RKLogLevelDebug);
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     NSString *userToken = [defaults objectForKey:@"user_token"];
     NSString *userEmail = [defaults objectForKey:@"user_email"];
     NSString *userId    = [defaults objectForKey:@"user_id"];
@@ -147,33 +161,87 @@
     
     NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
     
-    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:requestPathResponseReady keyPath:@"" statusCodes:statusCodes];
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor
+                                                responseDescriptorWithMapping:responseMapping
+                                                method:RKRequestMethodAny
+                                                pathPattern:requestPathResponseReady
+                                                keyPath:@""
+                                                statusCodes:statusCodes];
     
-    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Run class] rootKeyPath:@"" method:RKRequestMethodAny];
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor
+                                              requestDescriptorWithMapping:requestMapping
+                                              objectClass:[Run class]
+                                              rootKeyPath:@""
+                                              method:RKRequestMethodAny];
     
     [[RKObjectManager sharedManager] addRequestDescriptor:requestDescriptor];
     [[RKObjectManager sharedManager] addResponseDescriptor:responseDescriptor];
     
-    AppDelegate* appDelegate = [AppDelegate sharedAppDelegate];
-    
-    Run *newRun = [NSEntityDescription insertNewObjectForEntityForName:@"Run" inManagedObjectContext:appDelegate.managedObjectContext];
+    NSManagedObjectContext *moc =[[[RKObjectManager sharedManager]managedObjectStore]mainQueueManagedObjectContext];
+    Run *newRun = [NSEntityDescription insertNewObjectForEntityForName:@"Run" inManagedObjectContext:moc];
     
     newRun.distance = self.runDistance;
     newRun.duration = self.runDuration;
     newRun.datetime = self.runDateAndTime;
-    newRun.user = [User MR_findFirstByAttribute:@"userId"
-                                      withValue:userId];
+    newRun.user = [User MR_findFirstByAttribute:@"userId" withValue:userId];
     
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+    // POST with image
     
-    // POST to create
-    [[RKObjectManager sharedManager] postObject:newRun path:requestPath parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        [SVProgressHUD dismiss];
-        [self.navigationController popViewControllerAnimated:YES];
+    if (self.runImage.image !=nil) {
+        
+        NSMutableURLRequest *request = [[RKObjectManager sharedManager]
+                                        multipartFormRequestWithObject:newRun
+                                        method:RKRequestMethodPOST
+                                        path:requestPath
+                                        parameters:nil
+                                        constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            
+        NSData *imgData = UIImagePNGRepresentation(self.runImage.image);
+        NSLog(@"Size of ori Image(bytes):%lu",(unsigned long)[imgData length]);
+           
+        int SIZE_LIMIT = 1024*1024;
+        float compressionQuality = 1;
+            
+        while ((unsigned long)[imgData length] > SIZE_LIMIT) {
+                
+            imgData = UIImageJPEGRepresentation(self.runImage.image,compressionQuality);
+            compressionQuality = compressionQuality-0.1;
+            NSLog(@"Size of sma Image(bytes):%lu",(unsigned long)[imgData length]);
+        }
+            
+        [formData appendPartWithFileData:imgData
+                                    name:@"rod_images_attributes[0][image]"
+                                fileName:[self randomFileName:32 withExtension:@"jpg"]
+                                mimeType:@"image/jpg"];}];
+        
 
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        [SVProgressHUD dismiss];
-    }];
+        RKManagedObjectRequestOperation *operation = [[RKObjectManager sharedManager]
+                                                      managedObjectRequestOperationWithRequest:request
+                                                      managedObjectContext:moc
+                                                      success:
+            ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+                [SVProgressHUD dismiss];
+            [self.navigationController popViewControllerAnimated:YES];}
+                                                      failure:
+            ^(RKObjectRequestOperation *operation, NSError *error) {
+                [SVProgressHUD dismiss];}];
+        
+        operation.targetObject = newRun;
+        [[RKObjectManager sharedManager] enqueueObjectRequestOperation:operation]; // NOTE: Must be enqueued rather than started
+        
+    } else {
+        
+        [[RKObjectManager sharedManager] postObject:newRun
+                                               path:requestPath
+                                         parameters:nil
+                                            success:
+         ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            [SVProgressHUD dismiss];
+            [self.navigationController popViewControllerAnimated:YES];}
+                                            failure:
+         ^(RKObjectRequestOperation *operation, NSError *error) {
+            [SVProgressHUD dismiss];}];
+    }
 }
 
 -(void) setLabel:(NSString*)label toUIButton:(UIButton*)button {
@@ -181,7 +249,6 @@
     [button setTitle:label forState:UIControlStateNormal];
     
 }
-
 
 -(NSDate*) dateFromNSString:(NSString *)dateString {
     
@@ -220,10 +287,12 @@
 }
 
 - (IBAction)selectADistance:(id)sender {
+    
     [ActionSheetDistancePicker showPickerWithTitle:@"Select Distance" bigUnitString:@"." bigUnitMax:99 selectedBigUnit:[self.distanceKmPart integerValue]smallUnitString:@"km" smallUnitMax:99 selectedSmallUnit:[self.distanceMeterPart integerValue] target:self action:@selector(measurementWasSelectedWithBigUnit:smallUnit:element:) origin:sender];
 }
 
 - (void)measurementWasSelectedWithBigUnit:(NSNumber *)bigUnit smallUnit:(NSNumber *)smallUnit element:(id)element {
+    
     self.distanceKmPart = bigUnit;
     self.distanceMeterPart = smallUnit;
     self.runDistance = [NSNumber numberWithFloat:[bigUnit floatValue]+[smallUnit floatValue]/100];
@@ -232,6 +301,7 @@
 
 
 - (IBAction)selectADate:(id)sender {
+    
     NSCalendar *calendar = [NSCalendar currentCalendar];
     [calendar setTimeZone: [NSTimeZone systemTimeZone]];
     NSDateComponents *minimumDateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
@@ -239,8 +309,16 @@
     NSDate *minDate = [calendar dateFromComponents:minimumDateComponents];
     NSDate *maxDate = [NSDate date];
     
-    _actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@"" datePickerMode:UIDatePickerModeDateAndTime selectedDate:self.runDateAndTime
-                                                               target:self action:@selector(dateWasSelected:element:) origin:sender];
+    if (_runDateAndTime == nil) {
+        
+        _runDateAndTime = [NSDate date];
+    }
+    
+    _actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@"" datePickerMode:UIDatePickerModeDateAndTime
+                                                         selectedDate:self.runDateAndTime
+                                                               target:self
+                                                               action:@selector(dateWasSelected:element:)
+                                                               origin:sender];
     
     [(ActionSheetDatePicker *) self.actionSheetPicker setMinimumDate:minDate];
     [(ActionSheetDatePicker *) self.actionSheetPicker setMaximumDate:maxDate];
@@ -249,18 +327,15 @@
     [self.actionSheetPicker addCustomButtonWithTitle:@"Yesterday" value:[[NSDate date] TC_dateByAddingCalendarUnits:NSCalendarUnitDay amount:-1]];
     self.actionSheetPicker.hideCancel = YES;
     [self.actionSheetPicker showActionSheetPicker];
-
 }
 
 - (void)dateWasSelected:(NSDate *)selectedDate element:(id)element {
     self.runDateAndTime = selectedDate;
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY-MM-dd HH:MM:SS"];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
     dateFormatter.timeZone = [NSTimeZone systemTimeZone];
-    
     [self setLabel:[dateFormatter stringFromDate:self.runDateAndTime] toUIButton:self.btnDateTime];
-
 }
 
 - (NSString *)timeFormatted:(int)totalSeconds
@@ -379,21 +454,19 @@
 - (IBAction)cameraTap:(id)sender {
     
     //Show action sheet for selecting photo source
-    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Please select photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take a photo", @"choose from library", nil];
+    UIActionSheet *popupQuery = [[UIActionSheet alloc]
+                                 initWithTitle:@"Please select photo"
+                                 delegate:self
+                                 cancelButtonTitle:@"Cancel"
+                                 destructiveButtonTitle:nil
+                                 otherButtonTitles:@"choose from library", nil];
     popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [popupQuery showInView:self.view];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
     if (buttonIndex == 0) {
-        
-        [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
-        
-    }
-    
-    if (buttonIndex == 1) {
         
         [self launchImagePickerViewController];
         
@@ -405,11 +478,13 @@
 }
 
 - (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didSelectAsset:(PHAsset *)asset {
+    
     NSLog(@"selecionou");
 }
 
 
 -(void) launchImagePickerViewController {
+    
     QBImagePickerController *imagePickerController = [QBImagePickerController new]; imagePickerController.delegate = self;
     imagePickerController.showsNumberOfSelectedAssets = YES;
 
@@ -450,46 +525,21 @@
     TOCropViewController *cropViewController = [[TOCropViewController alloc] initWithImage:[images objectAtIndex:0]];
     cropViewController.delegate = self;
     [self presentViewController:cropViewController animated:YES completion:nil];
-    
 }
 
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
-{
-    
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    //imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    imagePickerController.sourceType = sourceType;
-    imagePickerController.delegate = self;
-    
-    if (sourceType == UIImagePickerControllerSourceTypeCamera)
-    {
-        /*
-         The user wants to use the camera interface. Set up our custom overlay view for the camera.
-         */
-        imagePickerController.showsCameraControls = YES;
-        
-        
-    }
-//    
-//    self.imagePickerController = imagePickerController;
-//    [self presentViewController:self.imagePickerController animated:YES completion:nil];
-//    
-}
-
 - (void)cropViewController:(TOCropViewController *)cropViewController didCropToImage:(UIImage *)image withRect:(CGRect)cropRect angle:(NSInteger)angle
 {
     // 'image' is the newly cropped version of the original image
     
+    UIImage *small = [UIImage imageWithCGImage:image.CGImage scale:0.5 orientation:image.imageOrientation];
     self.runImage.contentMode = UIViewContentModeScaleAspectFit;
     self.runImage.clipsToBounds = YES;
-    self.runImage.image = image;
-
+    self.runImage.image =  small;
     [self dismissViewControllerAnimated:YES completion:NULL];
-
 }
 
 @end

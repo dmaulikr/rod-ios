@@ -17,6 +17,7 @@
 		1F24642F1D31692100BE84FA /* RunTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F24642E1D31692100BE84FA /* RunTableViewCell.m */; };
 		1F24EDBF1D39C28200169546 /* PaddingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F24EDBE1D39C28200169546 /* PaddingTextField.m */; };
 		1F24EDC21D39C2DF00169546 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F24EDC11D39C2DF00169546 /* BaseViewController.m */; };
+		1F26A7451D400B5000D722B3 /* MathController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F26A7441D400B5000D722B3 /* MathController.m */; };
 		1F4E17481D3AED1D001BA82D /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E17471D3AED1D001BA82D /* MeViewController.m */; };
 		1F5C4FF51D3D172F0035CB5A /* NSDate+TCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C4FF41D3D172F0035CB5A /* NSDate+TCUtils.m */; };
 		1F60172F1D22C74500144C2B /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F60172B1D22C74500144C2B /* MasterViewController.m */; };
@@ -86,6 +87,8 @@
 		1F24EDBE1D39C28200169546 /* PaddingTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaddingTextField.m; sourceTree = "<group>"; };
 		1F24EDC01D39C2DF00169546 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		1F24EDC11D39C2DF00169546 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		1F26A7441D400B5000D722B3 /* MathController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MathController.m; sourceTree = "<group>"; };
+		1F26A7461D400B6100D722B3 /* MathController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathController.h; sourceTree = "<group>"; };
 		1F4E17461D3AED1D001BA82D /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		1F4E17471D3AED1D001BA82D /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		1F5C4FF31D3D172F0035CB5A /* NSDate+TCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TCUtils.h"; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 				1F5C4FF41D3D172F0035CB5A /* NSDate+TCUtils.m */,
 				1F172F2F1D3A8EE700C12AAA /* UtilMethods.h */,
 				1F172F301D3A8EE700C12AAA /* UtilMethods.m */,
+				1F26A7441D400B5000D722B3 /* MathController.m */,
+				1F26A7461D400B6100D722B3 /* MathController.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -641,6 +646,7 @@
 				1F5C4FF51D3D172F0035CB5A /* NSDate+TCUtils.m in Sources */,
 				1F844C6D1D2165D2002EC430 /* User+CoreDataProperties.m in Sources */,
 				1F172F2A1D3A8A0100C12AAA /* constant.m in Sources */,
+				1F26A7451D400B5000D722B3 /* MathController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

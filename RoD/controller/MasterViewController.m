@@ -19,6 +19,7 @@
 #import "User.h"
 
 #import "DateTools.h"
+#import "MathController.h"
 
 
 @interface MasterViewController ()
@@ -95,11 +96,19 @@
     cell.distance_txt.text = [NSString stringWithFormat:@"%02.0f", myKm];
 
     if (isnan(myMeters)) {
-        cell.decimal_distance_txt.text = [NSString stringWithFormat:@",%.0f", [run.distance floatValue]*10];
+        cell.decimal_distance_txt.text = [NSString stringWithFormat:@".%.0f", [run.distance floatValue]*10];
     } else {
-        cell.decimal_distance_txt.text = [NSString stringWithFormat:@",%.0f", myMeters*10];
+        cell.decimal_distance_txt.text = [NSString stringWithFormat:@".%.0f", myMeters*10];
     }
+    
+    cell.pace_txt.text = [MathController stringifyAvgPaceFromDist:[run.distance floatValue]*1000 overTime:[run.duration integerValue]];
+    
+    float speed = [MathController speedWithDistance:[run.distance floatValue] andDuration:[run.duration floatValue]];
+    NSString *badg_name = [NSString stringWithFormat:@"white_%@",[MathController speedBadge:speed]];
+    
+    cell.pace_icon.image = [UIImage imageNamed:badg_name];
 
+    
     return cell;
 }
 

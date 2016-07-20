@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "NSDate+TCUtils.h"
 #import "ActionSheetPicker.h"
+#import "TOCropViewController.h"
 
 @class NewRunViewController;
 @protocol NewRunViewControllerDelegate <NSObject>   //define delegate protocol
@@ -18,7 +19,7 @@
 
 @end //end protocol
 
-@interface NewRunViewController : UIViewController <ActionSheetCustomPickerDelegate, UIPickerViewDelegate, UIPickerViewDataSource > {
+@interface NewRunViewController : UIViewController <ActionSheetCustomPickerDelegate, UIPickerViewDelegate, UIPickerViewDataSource,TOCropViewControllerDelegate > {
     NSMutableArray *secondsArray;
     NSMutableArray *minutesArray;
     NSMutableArray *hoursArray;
