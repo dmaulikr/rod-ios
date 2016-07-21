@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>ActionSheetPicker-3.0.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -59,6 +64,16 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
+		<key>QBImagePickerController-QBImagePicker.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
+		</dict>
+		<key>QBImagePickerController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
 		<key>RKValueTransformers.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -78,6 +93,16 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>16</integer>
+		</dict>
+		<key>TOCropViewController-TOCropViewControllerBundle.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
+		</dict>
+		<key>TOCropViewController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
 		</dict>
 		<key>TransitionKit.xcscheme</key>
 		<dict>
@@ -137,7 +162,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3A8C9C9762282A255752D2CF932B548D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>41522A34D3E3B65D845AB14B22F06925</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>49258E86B2510B89E109B44FC2DA254E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4C36B1F5D992ACDFD781AFC537E2D4B2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4D1B46076DFDC6B9CE1592910D0112DB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5CD5F70851C37312014C6E1000C29DF4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,7 +222,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>823CD75C8606FEFC41CDFB1E19723854</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>92D1F5398290F108B41C322DE2242F2A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9305F8FC4D2A077D55BBD9C36682DC45</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>98A4555D5519246A802511520B3304ED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>998F11DE1C16344F75569DD538E8A6D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9CDCB65B882BE586AF56A5D761B5D6B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

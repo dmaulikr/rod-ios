@@ -56,6 +56,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [self.view endEditing:YES];
     return YES;
 }
 

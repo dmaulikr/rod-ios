@@ -48,7 +48,7 @@
 
 
 - (void)awakeFromNib {
-    self.backgroundColor = [UIColor colorWithRed:0.271 green:0.012 blue:0.200 alpha:0.6];
+    self.backgroundColor = [UIColor colorWithRed:1.000 green:1.000 blue:1.000 alpha:1.00];
     
     self.rightViewMode = UITextFieldViewModeAlways;
     self.leftViewMode = UITextFieldViewModeAlways;
@@ -62,9 +62,9 @@
     self.leftView = _leftViewHighlight;
     self.rightView = _rightViewHighlight;
     
-    self.backgroundColor = [UIColor colorWithRed:0.271 green:0.012 blue:0.200 alpha:1.00];
+    self.backgroundColor = [UIColor colorWithRed:1.000 green:1.000 blue:1.000 alpha:1.00];
 
-    _underlineLayer.backgroundColor = [UIColor colorWithRed:1.000 green:0.416 blue:1.000 alpha:1.00].CGColor;
+    _underlineLayer.backgroundColor = [UIColor colorWithRed:0.294 green:0.059 blue:0.682 alpha:1.00].CGColor;
     
 }
 
@@ -73,7 +73,7 @@
     self.leftView = _leftViewNormal;
     self.rightView = _rightViewNormal;
     
-    self.backgroundColor = [UIColor colorWithRed:0.271 green:0.012 blue:0.200 alpha:0.6];
+    self.backgroundColor = [UIColor colorWithRed:1.000 green:1.000 blue:1.000 alpha:1.00];
     _underlineLayer.backgroundColor = [UIColor whiteColor].CGColor;
 }
 
@@ -100,7 +100,7 @@
     CALayer * layer = [CALayer layer];
     CGRect frame = self.bounds;
     layer.frame = CGRectMake(0, frame.size.height-1, 600, 1.0f);
-    layer.backgroundColor = [UIColor colorWithRed:204/255.0 green:51/255.0 blue:51/255.0 alpha:1.0].CGColor;
+    layer.backgroundColor = [UIColor colorWithRed:0.294 green:0.059 blue:0.682 alpha:1.00].CGColor;
     //    layer.backgroundColor = [UIColor grayColor].CGColor;
     return layer;
 }
