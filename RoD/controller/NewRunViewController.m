@@ -44,6 +44,8 @@
     _btnSave.layer.rasterizationScale = [UIScreen mainScreen].scale;
     _btnSave.layer.shouldRasterize = YES;
     _btnSave.clipsToBounds = YES;
+    [_btnSave setShowsTouchWhenHighlighted:YES];
+
     
     NSString *strVal = [[NSString alloc] init];
     
@@ -106,7 +108,7 @@
         ALERT_WITH_TITLE(@"", NSLocalizedString(@"You should set run duration before save", nil));
         return;
     }
-    
+        
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
     
     // Log all HTTP traffic with request and response bodies

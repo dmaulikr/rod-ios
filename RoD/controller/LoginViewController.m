@@ -45,10 +45,12 @@
     UIButton * btnShowPass2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     [btnShowPass2 setImage:[UIImage imageNamed:@"ic_view_p"] forState:UIControlStateNormal];
     [btnShowPass2 addTarget:self action:@selector(btnShowPass_Click:) forControlEvents:UIControlEventTouchUpInside];
+    
     txtPassword.rightViewNormal = btnShowPass1;
     txtPassword.rightViewHighlight = btnShowPass2;
-    
     txtPassword.delegate = self;
+    
+    [_btnSignin setShowsTouchWhenHighlighted:YES];
     // Do any additional setup after loading the view.
 }
 
@@ -68,21 +70,25 @@
     
     NSString *userName = txtEmail.text;
     NSString *pass = txtPassword.text;
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+
     
     if (userName.length <= 0) {
         ALERT_WITH_TITLE(@"", NSLocalizedString(@"User name empty warning", nil));
+        [SVProgressHUD dismiss];
         return;
     }
     if (pass.length <= 0) {
         ALERT_WITH_TITLE(@"", NSLocalizedString(@"Password empty warning", nil));
+        [SVProgressHUD dismiss];
         return;
     }
     if ([userName conTainSpecialCharaters] || [pass conTainSpecialCharaters]) {
         ALERT_WITH_TITLE(@"",kMessageContainSpecialCharacters);
+        [SVProgressHUD dismiss];
         return;
     }
     
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
 
     
     NSURL *baseURL = [NSURL URLWithString:ENDPOINT_URL];
@@ -108,14 +114,16 @@
                                                                                             [defaults setObject:[JSON objectForKey:@"user_id"] forKey:@"user_id"];
                                                                                             
                                                                                             [defaults synchronize];
-                                                                                            [SVProgressHUD dismiss];
+
                                                                                             [self pushAuthUserView];
+                                                                                                                                                                                        [SVProgressHUD dismiss];
                                                                                             
                                                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                                                             NSLog(@"Request Failed with Error: %@, %@", error, error.userInfo);
                                                                                             NSLog(@"Failure");
-                                                                                            [SVProgressHUD dismiss];
+
                                                                                             ALERT_WITH_TITLE(@"", NSLocalizedString(@"Wrong password or Invalid user", nil));
+                                                                                                                                                                                        [SVProgressHUD dismiss];
 
                                                                                         }];
     
@@ -129,7 +137,12 @@
 - (void) pushAuthUserView {
     AppDelegate *myDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    myDelegate.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"TabBar"];
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UITabBarController * tab = [storyBoard instantiateViewControllerWithIdentifier:@"TabBar"];
+    
+    [Flurry logAllPageViewsForTarget:tab];
+    
+    [(UINavigationController*)myDelegate.window.rootViewController pushViewController:tab animated:YES];
 }
 
 /*
@@ -144,6 +157,8 @@
 
 #pragma mark - util methods
 - (void)btnShowPass_Click:(UIButton *)sender {
+    txtPassword.font = nil;
+    txtPassword.font = [UIFont systemFontOfSize:15.0 weight:UIFontWeightRegular];
     txtPassword.secureTextEntry = !txtPassword.secureTextEntry;
 }
 

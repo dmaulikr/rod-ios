@@ -47,6 +47,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [Flurry startSession:@"DBZ2TQV3FXB8MMSXNPWX"];
+    
     [MagicalRecord enableShorthandMethods];
     
     // Initialize RestKit
@@ -129,18 +131,24 @@
     
     // Enable Activity Indicator Spinner
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    
  
     //authenticatedUser: check from NSUserDefaults User credential if its present then set your navigation flow accordingly
     if (self.authenticatedUser)
     {
-        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+        UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        UINavigationController *controller = [storyBoard instantiateInitialViewController];
+        
+        [Flurry logAllPageViewsForTarget:controller];
+        self.window.rootViewController =  controller;
         
     }
     else
     {
         UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"login_vc"];
         UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
-                
+        
+        [Flurry logAllPageViewsForTarget:navigation];
         self.window.rootViewController = navigation;
     }
     

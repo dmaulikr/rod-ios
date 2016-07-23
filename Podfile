@@ -14,6 +14,7 @@ target 'RoD' do
     pod 'ActionSheetPicker-3.0'
     pod "QBImagePickerController"
     pod 'TOCropViewController'
+    pod 'Flurry-iOS-SDK/FlurrySDK'
 
   target 'RoDTests' do
     inherit! :search_paths

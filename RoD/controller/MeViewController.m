@@ -24,6 +24,7 @@
     _btnSignout.layer.rasterizationScale = [UIScreen mainScreen].scale;
     _btnSignout.layer.shouldRasterize = YES;
     _btnSignout.clipsToBounds = YES;
+    [_btnSignout setShowsTouchWhenHighlighted:YES];
 }
 - (IBAction)onLogoff:(id)sender {
     // Cancel any network operations and clear the cache
@@ -45,12 +46,15 @@
     
     [defaults synchronize];
     
-    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+    AppDelegate *myDelegate = [[UIApplication sharedApplication]delegate];
     
     UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"login_vc"];
     
     UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
-    appDelegateTemp.window.rootViewController = navigation;
+//    myDelegate.window.rootViewController = navigation;
+    
+    [(UINavigationController*)myDelegate.window.rootViewController pushViewController:rootController animated:YES];
+
 }
 
 

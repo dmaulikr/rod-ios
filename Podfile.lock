@@ -14,6 +14,7 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.13.1):
     - FBSDKCoreKit
+  - Flurry-iOS-SDK/FlurrySDK (7.6.4)
   - ISO8601DateFormatterValueTransformer (0.6.1):
     - RKValueTransformers (~> 1.1.0)
   - MagicalRecord (2.3.2):
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - Flurry-iOS-SDK/FlurrySDK
   - MagicalRecord
   - QBImagePickerController
   - RestKit
@@ -65,6 +67,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 2807fe0da2ddb49a1469da6d6ff597f99912980f
   FBSDKLoginKit: 6d350cb6a22d6956e9d078885de6ee8a0ebc51b4
   FBSDKShareKit: c9438df7573b33780ac8c3451201c5ebb260ffca
+  Flurry-iOS-SDK: 9da972687d3af9f48038dcd86eae9cad3acca456
   ISO8601DateFormatterValueTransformer: 52da467d6ec899d6aedda8e48280ac92e8ee97e6
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
@@ -75,6 +78,6 @@ SPEC CHECKSUMS:
   TOCropViewController: d3f09808012f4ec720886f88553e9a81a4847c39
   TransitionKit: 9ceccda4cd0cdc0a05ef85eb235e5a3292c3c250
 
-PODFILE CHECKSUM: 4e1273240afae90f4b5d56852bb00be8634cfe5a
+PODFILE CHECKSUM: 0df5baea3e68409210597ebb0bcc59cccaf30605
 
 COCOAPODS: 1.0.1
