@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1DE215CD1F4A3E95E0E820F2 /* libPods-RoD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 588251B957195DD6B1BCAEE7 /* libPods-RoD.a */; };
 		1F172F1B1D3A69DD00C12AAA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F172F191D3A69DD00C12AAA /* LoginViewController.m */; };
 		1F172F1F1D3A892A00C12AAA /* NSString+EmojiExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F172F1E1D3A892A00C12AAA /* NSString+EmojiExtension.m */; };
 		1F172F241D3A89A000C12AAA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F172F261D3A89A000C12AAA /* Localizable.strings */; };
@@ -46,8 +45,11 @@
 		1F844C701D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
 		1F844C711D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
 		1F844C721D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
-		8C07DA697BEDDB4EFE123DAF /* libPods-RoDTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C92B067CE7636E59F2DDB3 /* libPods-RoDTests.a */; };
-		E5A97251A72146AFD88C9E4A /* libPods-RoDUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6257BF3A7AFB5A004327CDC9 /* libPods-RoDUITests.a */; };
+		1F9D463C1D4529FE003731DE /* StatsControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9D463B1D4529FE003731DE /* StatsControllerViewController.m */; };
+		1F9D46401D453549003731DE /* Stats.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9D463F1D453549003731DE /* Stats.m */; };
+		92F2FA2E1814C49D223C9766 /* libPods-RoD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 609EFA5C4F6EFD4EDC3F09B8 /* libPods-RoD.a */; };
+		BDF45C2A5BED64C3F03194C5 /* libPods-RoDUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BDA91AC1082F7E8D1C5E9AA /* libPods-RoDUITests.a */; };
+		EC18339D4C2C66CF82716B00 /* libPods-RoDTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB1E60B7D5DE05690088F679 /* libPods-RoDTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1BDA91AC1082F7E8D1C5E9AA /* libPods-RoDUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoDUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F172F191D3A69DD00C12AAA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		1F172F1A1D3A69DD00C12AAA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		1F172F1C1D3A88AA00C12AAA /* rod-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rod-prefix.pch"; sourceTree = "<group>"; };
@@ -123,15 +126,18 @@
 		1F844C641D2165D2002EC430 /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
 		1F844C651D2165D2002EC430 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		1F844C661D2165D2002EC430 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		1F9D463A1D4529FE003731DE /* StatsControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsControllerViewController.h; path = Stats/StatsControllerViewController.h; sourceTree = "<group>"; };
+		1F9D463B1D4529FE003731DE /* StatsControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsControllerViewController.m; path = Stats/StatsControllerViewController.m; sourceTree = "<group>"; };
+		1F9D463D1D45309E003731DE /* Stats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stats.h; sourceTree = "<group>"; };
+		1F9D463F1D453549003731DE /* Stats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stats.m; sourceTree = "<group>"; };
 		2FE00FA8C6A8F8D2CEA1EAD8 /* Pods-RoDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoDTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoDTests/Pods-RoDTests.release.xcconfig"; sourceTree = "<group>"; };
 		41D491880CAA75BA082F49A7 /* Pods-RoDUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoDUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoDUITests/Pods-RoDUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		469C5F277037A1BC542A7317 /* Pods-RoD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoD.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoD/Pods-RoD.debug.xcconfig"; sourceTree = "<group>"; };
-		46C92B067CE7636E59F2DDB3 /* libPods-RoDTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoDTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		588251B957195DD6B1BCAEE7 /* libPods-RoD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoD.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6257BF3A7AFB5A004327CDC9 /* libPods-RoDUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoDUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		609EFA5C4F6EFD4EDC3F09B8 /* libPods-RoD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoD.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74440DC6A7B732C6C61E3CA3 /* Pods-RoD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoD.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoD/Pods-RoD.release.xcconfig"; sourceTree = "<group>"; };
 		817E45A3A4693AF1371C834A /* Pods-RoDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoDTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoDTests/Pods-RoDTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AFBB08EB1586EEE7F0BA1C6F /* Pods-RoDUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoDUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoDUITests/Pods-RoDUITests.release.xcconfig"; sourceTree = "<group>"; };
+		EB1E60B7D5DE05690088F679 /* libPods-RoDTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RoDTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DE215CD1F4A3E95E0E820F2 /* libPods-RoD.a in Frameworks */,
+				92F2FA2E1814C49D223C9766 /* libPods-RoD.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C07DA697BEDDB4EFE123DAF /* libPods-RoDTests.a in Frameworks */,
+				EC18339D4C2C66CF82716B00 /* libPods-RoDTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,7 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5A97251A72146AFD88C9E4A /* libPods-RoDUITests.a in Frameworks */,
+				BDF45C2A5BED64C3F03194C5 /* libPods-RoDUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,14 +236,12 @@
 		1F60172A1D22C43F00144C2B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1F5C4FEF1D3D02A00035CB5A /* AddRun */,
+				1F9D46391D4529C4003731DE /* Stats */,
+				1F9D46381D45298F003731DE /* Runs */,
 				1F4E17451D3AECE5001BA82D /* Me */,
 				1F24EDC01D39C2DF00169546 /* BaseViewController.h */,
 				1F24EDC11D39C2DF00169546 /* BaseViewController.m */,
 				1F3BA30E1D396946001CA8BD /* LoginVC */,
-				1F24642C1D3168FF00BE84FA /* cells */,
-				1F60172B1D22C74500144C2B /* MasterViewController.m */,
-				1F60172C1D22C74500144C2B /* MasterViewController.h */,
 				1F60172D1D22C74500144C2B /* DetailViewController.m */,
 				1F60172E1D22C74500144C2B /* DetailViewController.h */,
 			);
@@ -334,9 +338,31 @@
 				1F844C641D2165D2002EC430 /* User+CoreDataProperties.m */,
 				1F844C651D2165D2002EC430 /* User.h */,
 				1F844C661D2165D2002EC430 /* User.m */,
+				1F9D463D1D45309E003731DE /* Stats.h */,
+				1F9D463F1D453549003731DE /* Stats.m */,
 			);
 			name = Model;
 			path = model;
+			sourceTree = "<group>";
+		};
+		1F9D46381D45298F003731DE /* Runs */ = {
+			isa = PBXGroup;
+			children = (
+				1F5C4FEF1D3D02A00035CB5A /* AddRun */,
+				1F60172B1D22C74500144C2B /* MasterViewController.m */,
+				1F60172C1D22C74500144C2B /* MasterViewController.h */,
+				1F24642C1D3168FF00BE84FA /* cells */,
+			);
+			name = Runs;
+			sourceTree = "<group>";
+		};
+		1F9D46391D4529C4003731DE /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				1F9D463A1D4529FE003731DE /* StatsControllerViewController.h */,
+				1F9D463B1D4529FE003731DE /* StatsControllerViewController.m */,
+			);
+			name = Stats;
 			sourceTree = "<group>";
 		};
 		B9DB69E847FDDF8F19628EF9 /* Pods */ = {
@@ -355,9 +381,9 @@
 		F34DC7FFFC1FF1819AFCB171 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				588251B957195DD6B1BCAEE7 /* libPods-RoD.a */,
-				46C92B067CE7636E59F2DDB3 /* libPods-RoDTests.a */,
-				6257BF3A7AFB5A004327CDC9 /* libPods-RoDUITests.a */,
+				609EFA5C4F6EFD4EDC3F09B8 /* libPods-RoD.a */,
+				EB1E60B7D5DE05690088F679 /* libPods-RoDTests.a */,
+				1BDA91AC1082F7E8D1C5E9AA /* libPods-RoDUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -638,6 +664,8 @@
 				1F844C251D216098002EC430 /* main.m in Sources */,
 				1F24642F1D31692100BE84FA /* RunTableViewCell.m in Sources */,
 				1F172F1B1D3A69DD00C12AAA /* LoginViewController.m in Sources */,
+				1F9D46401D453549003731DE /* Stats.m in Sources */,
+				1F9D463C1D4529FE003731DE /* StatsControllerViewController.m in Sources */,
 				1F172F311D3A8EE700C12AAA /* UtilMethods.m in Sources */,
 				1F4E17481D3AED1D001BA82D /* MeViewController.m in Sources */,
 				1F24EDBF1D39C28200169546 /* PaddingTextField.m in Sources */,
@@ -797,6 +825,7 @@
 			baseConfigurationReference = 469C5F277037A1BC542A7317 /* Pods-RoD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/rod-prefix.pch";
@@ -831,8 +860,9 @@
 			baseConfigurationReference = 74440DC6A7B732C6C61E3CA3 /* Pods-RoD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: PARSEC DIGITAL LTDA (646C7J72PD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/rod-prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
 					"$(inherited)",

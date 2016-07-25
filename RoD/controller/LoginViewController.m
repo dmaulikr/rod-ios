@@ -7,10 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "AFNetworking.h"
-#import <RestKit/CoreData.h>
-#import <RestKit/RestKit.h>
-
 
 
 @interface LoginViewController ()

@@ -16,8 +16,13 @@
 #import <RestKit/CoreData.h>
 #import <RestKit/RestKit.h>
 #import "AppDelegate.h"
-//#import <SVPullToRefresh.h>
 #import "Flurry.h"
+#import "AFNetworking.h"
+#import <MBCircularProgressBar/MBCircularProgressBarView.h>
+
+#import "User.h"
+#import "Run.h"
+#import "Stats.h"
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
