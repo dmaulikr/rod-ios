@@ -21,11 +21,7 @@
 
 @implementation NewRunViewController
 
-
-- (void)viewDidLoad {
-
-    [super viewDidLoad];
-        
+- (void) setupview {
     _btnDateTime.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _btnDuration.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _btnDistance.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -45,7 +41,7 @@
     _btnSave.layer.shouldRasterize = YES;
     _btnSave.clipsToBounds = YES;
     [_btnSave setShowsTouchWhenHighlighted:YES];
-
+    
     
     NSString *strVal = [[NSString alloc] init];
     
@@ -65,7 +61,12 @@
         [minutesArray addObject:strVal];
         [secondsArray addObject:strVal];
     }
-    
+}
+
+- (void)viewDidLoad {
+
+    [super viewDidLoad];
+    [self setupview];
     // Do any additional setup after loading the view.
 }
 

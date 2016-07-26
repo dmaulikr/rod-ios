@@ -244,8 +244,6 @@
 				1F24EDC01D39C2DF00169546 /* BaseViewController.h */,
 				1F24EDC11D39C2DF00169546 /* BaseViewController.m */,
 				1F3BA30E1D396946001CA8BD /* LoginVC */,
-				1F60172D1D22C74500144C2B /* DetailViewController.m */,
-				1F60172E1D22C74500144C2B /* DetailViewController.h */,
 			);
 			name = Controller;
 			path = controller;
@@ -356,9 +354,19 @@
 			name = Resource;
 			sourceTree = "<group>";
 		};
+		1F9343BE1D4701EE003217CE /* EditRun */ = {
+			isa = PBXGroup;
+			children = (
+				1F60172D1D22C74500144C2B /* DetailViewController.m */,
+				1F60172E1D22C74500144C2B /* DetailViewController.h */,
+			);
+			name = EditRun;
+			sourceTree = "<group>";
+		};
 		1F9D46381D45298F003731DE /* Runs */ = {
 			isa = PBXGroup;
 			children = (
+				1F9343BE1D4701EE003217CE /* EditRun */,
 				1F5C4FEF1D3D02A00035CB5A /* AddRun */,
 				1F60172B1D22C74500144C2B /* MasterViewController.m */,
 				1F60172C1D22C74500144C2B /* MasterViewController.h */,

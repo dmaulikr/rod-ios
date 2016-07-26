@@ -24,7 +24,7 @@
 
 @interface MasterViewController ()
 
-@property NSArray *runs;
+@property NSMutableArray *runs;
 
 @end
 
@@ -36,6 +36,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -51,22 +53,70 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+// During startup (-viewDidLoad or in storyboard) do:
+
+
+// Override to support conditional editing of the table view.
+// This only needs to be implemented if you are going to be returning NO
+// for some items. By default, all items are editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        //add code here for when you hit delete
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *userToken = [defaults objectForKey:@"user_token"];
+        NSString *userEmail = [defaults objectForKey:@"user_email"];
+        NSString *userId    = [defaults objectForKey:@"user_id"];
+        
+        Run *run = self.runs[indexPath.row];
+        
+        NSString *requestPath = [NSString stringWithFormat:@"/api/v1/runs/%@?user_email=%@&user_token=%@", run.runId, userEmail, userToken];
+        
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+        
+        [[RKObjectManager sharedManager] deleteObject:run path:requestPath parameters:nil success: ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            //runs have been saved in core data by now
+            [SVProgressHUD dismiss];
+
+
+        }
+                                              failure: ^(RKObjectRequestOperation *operation, NSError *error) {
+                                                  [SVProgressHUD dismiss];
+                                                  
+                                                  ALERT_WITH_TITLE(@"", NSLocalizedString(@"Error while loading runs", nil));
+                                                  
+                                                  RKLogError(@"Load failed with error: %@", error);
+                                              }];
+        
+        [self.runs removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+        
+    }
+}
+
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+    if ([[segue identifier] isEqualToString:@"edit_run"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Run *run = self.runs[indexPath.row];
-        DetailViewController *controller = (DetailViewController *)[[segue destinationViewController] topViewController];
-        [controller setDetailItem:run];
+        DetailViewController *controller = (DetailViewController *)[segue destinationViewController];
         controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem;
         controller.navigationItem.leftItemsSupplementBackButton = YES;
-    }
-    
-    if ([[segue identifier] isEqualToString:@"addRun"]) {
-        NewRunViewController *controller = (NewRunViewController *)[segue destinationViewController];
-//        controller.delegate = self;
-        
+        controller.currentRun = self.runs[indexPath.row];
     }
 }
 
@@ -159,7 +209,8 @@
     User *user = [fetchedObjects firstObject];
     
     NSSortDescriptor *dateSort = [NSSortDescriptor sortDescriptorWithKey:@"datetime" ascending:NO];
-    self.runs = [[user.runs allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:dateSort]];
+    
+    self.runs = [NSMutableArray arrayWithArray:[[user.runs allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:dateSort]]];
 
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 
