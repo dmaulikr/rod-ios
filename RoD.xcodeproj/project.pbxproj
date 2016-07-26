@@ -45,6 +45,7 @@
 		1F844C701D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
 		1F844C711D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
 		1F844C721D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
+		1F9343BD1D469150003217CE /* chartjs.html in Resources */ = {isa = PBXBuildFile; fileRef = 1F9343BC1D469150003217CE /* chartjs.html */; };
 		1F9D463C1D4529FE003731DE /* StatsControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9D463B1D4529FE003731DE /* StatsControllerViewController.m */; };
 		1F9D46401D453549003731DE /* Stats.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9D463F1D453549003731DE /* Stats.m */; };
 		92F2FA2E1814C49D223C9766 /* libPods-RoD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 609EFA5C4F6EFD4EDC3F09B8 /* libPods-RoD.a */; };
@@ -126,6 +127,7 @@
 		1F844C641D2165D2002EC430 /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
 		1F844C651D2165D2002EC430 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		1F844C661D2165D2002EC430 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		1F9343BC1D469150003217CE /* chartjs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = chartjs.html; sourceTree = "<group>"; };
 		1F9D463A1D4529FE003731DE /* StatsControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsControllerViewController.h; path = Stats/StatsControllerViewController.h; sourceTree = "<group>"; };
 		1F9D463B1D4529FE003731DE /* StatsControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsControllerViewController.m; path = Stats/StatsControllerViewController.m; sourceTree = "<group>"; };
 		1F9D463D1D45309E003731DE /* Stats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stats.h; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 		1F844C221D216098002EC430 /* RoD */ = {
 			isa = PBXGroup;
 			children = (
+				1F9343BB1D46913F003217CE /* Resource */,
 				1F24EDBC1D39C27000169546 /* Lib */,
 				1F6485231D243E2E0019EB8A /* View */,
 				1F60172A1D22C43F00144C2B /* Controller */,
@@ -343,6 +346,14 @@
 			);
 			name = Model;
 			path = model;
+			sourceTree = "<group>";
+		};
+		1F9343BB1D46913F003217CE /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				1F9343BC1D469150003217CE /* chartjs.html */,
+			);
+			name = Resource;
 			sourceTree = "<group>";
 		};
 		1F9D46381D45298F003731DE /* Runs */ = {
@@ -503,6 +514,7 @@
 				1F172F241D3A89A000C12AAA /* Localizable.strings in Resources */,
 				1F844C361D216098002EC430 /* LaunchScreen.storyboard in Resources */,
 				1F844C331D216098002EC430 /* Assets.xcassets in Resources */,
+				1F9343BD1D469150003217CE /* chartjs.html in Resources */,
 				1F6485251D243E690019EB8A /* RoD.storyboard in Resources */,
 				1F6485691D244CEA0019EB8A /* Main.storyboard in Resources */,
 			);

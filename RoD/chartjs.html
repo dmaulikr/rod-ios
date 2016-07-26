@@ -1,0 +1,89 @@
+<html>
+    
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        
+        <style type="text/css">
+            *:before,
+            *:after {
+                box-sizing: inherit;
+            }
+        
+        html {
+            box-sizing: border-box;
+        }
+        
+        .l-chart {
+            padding: 20px;
+        }
+        
+        .aspect-ratio {
+            height: 0;
+            padding-bottom: 50%; /* 495h / 990w : The Intended dimensions */
+        }
+        </style>
+        
+    </head>
+    
+    <body style="background-color: transparent;">
+        <div class="l-chart">
+            <div class="aspect-ratio">
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+    </body>
+    <script>
+        
+        Chart.defaults.global.animationEasing        = 'easeInOutQuad',
+        Chart.defaults.global.responsive             = true;
+        Chart.defaults.global.scaleOverride          = true;
+        Chart.defaults.global.scaleShowLabels        = true;
+        Chart.defaults.global.scaleSteps             = 6;
+        Chart.defaults.global.scaleStepWidth         = 10;
+        Chart.defaults.global.scaleStartValue        = 0;
+        Chart.defaults.global.scaleLabel             = "<%=value%> km";
+        Chart.defaults.global.scaleIntegersOnly      = true;
+        Chart.defaults.global.tooltipFontFamily      = 'Helvetica Neue';
+        Chart.defaults.global.tooltipFillColor       = '#FFFFFF';
+        Chart.defaults.global.tooltipFontColor       = '#6E6E6E';
+        Chart.defaults.global.tooltipCaretSize       = 0;
+        Chart.defaults.global.maintainAspectRatio    = true;
+        Chart.defaults.Line.scaleShowVerticalLines      = false;
+        Chart.defaults.Line.scaleShowHorizontalLines = false;
+        Chart.defaults.Line.scaleGridLineColor       = '#aaaaaa';
+        Chart.defaults.Line.scaleLineColor           = '#aaaaaa';
+        
+        var chart    = document.getElementById('chart').getContext('2d'),
+        gradient = chart.createLinearGradient(0, 0, 0, 450);
+        
+        var data  = {
+            labels: ["W25", "W26", "W27", "W28", "W29", "W30"],
+            datasets: [{
+                       label: 'Target',
+                       fillColor: 'rgba(98, 64, 184, 0.25)',
+                       strokeColor: '#6240b8',
+                       pointColor: '#6240b8',
+                       pointStrokeColor: 'rgba(220,220,220,1)',
+                       pointHighlightFill: '#6240b8',
+                       pointHighlightStroke: 'rgba(220,220,220,1)',
+                       data: [50, 45, 53, 47, 50, 25]
+                       },{
+                       label: 'Reals',
+                       fillColor: 'rgba(10, 175, 246, 0.25)',
+                       strokeColor: '#0aaff6',
+                       pointColor: '#0aaff6',
+                       pointStrokeColor: 'rgba(220,220,220,1)',
+                       pointHighlightFill: '#0aaff6',
+                       pointHighlightStroke: 'rgba(220,220,220,1)',
+                       data: [50.16, 26.49, 53.04, 46.86, 24.58, 0]
+                       }]};
+    
+    gradient.addColorStop(0, 'rgba(98, 64, 184, 0.5)');
+    gradient.addColorStop(0.5, 'rgba(98, 64, 184, 0.25)');
+    gradient.addColorStop(1, 'rgba(98, 64, 184, 0)');
+    
+    var chart = new Chart(chart).Line(data);
+    
+        </script>
+</html>
+

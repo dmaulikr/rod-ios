@@ -28,6 +28,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)forwardStatus:(id)sender {
+    _statsPosition = _statsPosition-1;
+    [self buildView];
+}
+- (IBAction)backwardStatus:(id)sender {
+    _statsPosition = _statsPosition+1;
+    [self buildView];
+}
 
 #pragma mark - RESTKit
 
@@ -40,10 +48,35 @@
         _weekGoal.text = [NSString stringWithFormat:@"%02i",[currentStats.goal intValue]];
         _weekPace.text = [NSString stringWithFormat:@"%@",currentStats.pace];
         _weekRunCount.text = [NSString stringWithFormat:@"%i",[currentStats.run_count intValue]];
-
+        _weekNumber.text = [NSString stringWithFormat:@"semana %i",[currentStats.number intValue]];
+        [_goalProgress setValue:([currentStats.total_kms floatValue]/[currentStats.goal intValue])*100 animateWithDuration:1];
+        
+        _chartView.opaque = NO;
+        _chartView.backgroundColor = [UIColor clearColor];
+        
+        NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"chartjs" ofType:@"html"];
+        NSLog(@"file ->%@", htmlFile);
+        NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+        NSLog(@"content ->%@",htmlString);
+        [_chartView loadHTMLString:htmlString baseURL:nil];
         
     } else {
         
+    }
+    
+    if ([_statsArray count] <= 1) {
+        _forwardButton.enabled = FALSE;
+        _backwardButton.enabled = FALSE;
+    } else {
+        _forwardButton.enabled = TRUE;
+        _backwardButton.enabled = TRUE;
+    }
+    
+    if (_statsPosition == 0) {
+        _forwardButton.enabled = FALSE;
+    }
+    if (_statsPosition == [_statsArray count]-1) {
+        _backwardButton.enabled = FALSE;
     }
 }
 

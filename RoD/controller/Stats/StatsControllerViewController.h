@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *weekDistance;
 @property (weak, nonatomic) IBOutlet UILabel *weekNumber;
 @property (weak, nonatomic) IBOutlet MBCircularProgressBarView *goalProgress;
+@property (weak, nonatomic) IBOutlet UIButton *forwardButton;
+@property (weak, nonatomic) IBOutlet UIButton *backwardButton;
+@property (weak, nonatomic) IBOutlet UIWebView *chartView;
 
 -(void) buildView;
 
