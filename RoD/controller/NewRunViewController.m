@@ -70,35 +70,6 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
--(NSString *) randomFileName:(int)len withExtension: (NSString*)extension {
-    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
-    
-    for (int i=0; i<len; i++) {
-        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
-    }
-    
-    return [NSString stringWithFormat:@"%@.%@",randomString,extension];
-}
-
-
 - (IBAction)doPostRun:(id)sender {
     
     if ([self.runDistance floatValue] == 0) {
@@ -109,142 +80,19 @@
         ALERT_WITH_TITLE(@"", NSLocalizedString(@"You should set run duration before save", nil));
         return;
     }
-        
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    
-    // Log all HTTP traffic with request and response bodies
-    RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    
-    // Log debugging info about Core Data
-    RKLogConfigureByName("RestKit/CoreData", RKLogLevelDebug);
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *userToken = [defaults objectForKey:@"user_token"];
-    NSString *userEmail = [defaults objectForKey:@"user_email"];
-    NSString *userId    = [defaults objectForKey:@"user_id"];
-    
-    NSString *requestPath = [NSString stringWithFormat:@"/api/v1/users/%@/runs?user_email=%@&user_token=%@", userId, userEmail, userToken];
-    NSString *requestPathResponseReady = [NSString stringWithFormat:@"/api/v1/users/%@/runs", userId, userEmail, userToken];
-
-    
-    RKObjectMapping *userMapping = [RKObjectMapping mappingForClass:[User class]];
-    [userMapping
-     addAttributeMappingsFromDictionary:
-     @{
-       @"email"         : @"email",
-       @"status"        : @"status",
-       @"name"          : @"name",
-       @"id"            : @"userId"
-       }
-     ];
-    
-    RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Run class]];
-    [responseMapping
-     addAttributeMappingsFromDictionary:
-     @{
-       @"distance" : @"distance",
-       @"duration" : @"duration",
-       @"pace"     : @"pace",
-       @"speed"    : @"speed",
-       @"datetime" : @"datetime",
-       @"id"       : @"runId"
-       }
-     ];
-    
-    RKObjectMapping *requestMapping = [RKObjectMapping requestMapping]; // objectClass == NSMutableDictionary
-    [requestMapping
-     addAttributeMappingsFromDictionary:
-     @{
-       @"distance" : @"distance",
-       @"duration" : @"duration",
-       @"datetime" : @"datetime",
-       @"userId"  :  @"user_id"
-       }
-     ];
-    
-    NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
-    
-    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor
-                                                responseDescriptorWithMapping:responseMapping
-                                                method:RKRequestMethodAny
-                                                pathPattern:requestPathResponseReady
-                                                keyPath:@""
-                                                statusCodes:statusCodes];
-    
-    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor
-                                              requestDescriptorWithMapping:requestMapping
-                                              objectClass:[Run class]
-                                              rootKeyPath:@""
-                                              method:RKRequestMethodAny];
-    
-    [[RKObjectManager sharedManager] addRequestDescriptor:requestDescriptor];
-    [[RKObjectManager sharedManager] addResponseDescriptor:responseDescriptor];
-    
-    NSManagedObjectContext *moc =[[[RKObjectManager sharedManager]managedObjectStore]mainQueueManagedObjectContext];
-    Run *newRun = [NSEntityDescription insertNewObjectForEntityForName:@"Run" inManagedObjectContext:moc];
-    
-    newRun.distance = self.runDistance;
-    newRun.duration = self.runDuration;
-    newRun.datetime = self.runDateAndTime;
-    newRun.user = [User MR_findFirstByAttribute:@"userId" withValue:userId];
-    
-    // POST with image
-    
-    if (self.runImage.image !=nil) {
-        
-        NSMutableURLRequest *request = [[RKObjectManager sharedManager]
-                                        multipartFormRequestWithObject:newRun
-                                        method:RKRequestMethodPOST
-                                        path:requestPath
-                                        parameters:nil
-                                        constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            
-        NSData *imgData = UIImagePNGRepresentation(self.runImage.image);
-        NSLog(@"Size of ori Image(bytes):%lu",(unsigned long)[imgData length]);
-           
-        int SIZE_LIMIT = 1024*1024;
-        float compressionQuality = 1;
-            
-        while ((unsigned long)[imgData length] > SIZE_LIMIT) {
-                
-            imgData = UIImageJPEGRepresentation(self.runImage.image,compressionQuality);
-            compressionQuality = compressionQuality-0.1;
-            NSLog(@"Size of sma Image(bytes):%lu",(unsigned long)[imgData length]);
-        }
-            
-        [formData appendPartWithFileData:imgData
-                                    name:@"rod_images_attributes[0][image]"
-                                fileName:[self randomFileName:32 withExtension:@"jpg"]
-                                mimeType:@"image/jpg"];}];
-        
-
-        RKManagedObjectRequestOperation *operation = [[RKObjectManager sharedManager]
-                                                      managedObjectRequestOperationWithRequest:request
-                                                      managedObjectContext:moc
-                                                      success:
-            ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                [SVProgressHUD dismiss];
-            [self.navigationController popViewControllerAnimated:YES];}
-                                                      failure:
-            ^(RKObjectRequestOperation *operation, NSError *error) {
-                [SVProgressHUD dismiss];}];
-        
-        operation.targetObject = newRun;
-        [[RKObjectManager sharedManager] enqueueObjectRequestOperation:operation]; // NOTE: Must be enqueued rather than started
-        
-    } else {
-        
-        [[RKObjectManager sharedManager] postObject:newRun
-                                               path:requestPath
-                                         parameters:nil
-                                            success:
-         ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            [SVProgressHUD dismiss];
-            [self.navigationController popViewControllerAnimated:YES];}
-                                            failure:
-         ^(RKObjectRequestOperation *operation, NSError *error) {
-            [SVProgressHUD dismiss];}];
+    if (self.runImage.image == nil) {
+        ALERT_WITH_TITLE(@"", NSLocalizedString(@"You must selec a image for your run", nil));
+        return;
     }
+    
+    AppData *appData = [AppData sharedManager];
+    
+    Run* tempRun = [appData createTemporaryRunWithDistance:_runDistance duration:_runDuration dateAndTime:_runDateAndTime andImage:_runImage.image];
+    
+    [appData createRun:tempRun withImage:_runImage.image withBlock:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+
 }
 
 -(void) setLabel:(NSString*)label toUIButton:(UIButton*)button {

@@ -112,142 +112,15 @@
         return;
     }
     
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    
-    // Log all HTTP traffic with request and response bodies
-    RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    
-    // Log debugging info about Core Data
-    RKLogConfigureByName("RestKit/CoreData", RKLogLevelDebug);
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *userToken = [defaults objectForKey:@"user_token"];
-    NSString *userEmail = [defaults objectForKey:@"user_email"];
-    NSString *userId    = [defaults objectForKey:@"user_id"];
-    
-    NSString *requestPath = [NSString stringWithFormat:@"/api/v1/users/%@/runs?user_email=%@&user_token=%@", userId, userEmail, userToken];
-    NSString *requestPathResponseReady = [NSString stringWithFormat:@"/api/v1/users/%@/runs", userId, userEmail, userToken];
-    
-    
-    RKObjectMapping *userMapping = [RKObjectMapping mappingForClass:[User class]];
-    [userMapping
-     addAttributeMappingsFromDictionary:
-     @{
-       @"email"         : @"email",
-       @"status"        : @"status",
-       @"name"          : @"name",
-       @"id"            : @"userId"
-       }
-     ];
-    
-    RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Run class]];
-    [responseMapping
-     addAttributeMappingsFromDictionary:
-     @{
-       @"distance" : @"distance",
-       @"duration" : @"duration",
-       @"pace"     : @"pace",
-       @"speed"    : @"speed",
-       @"datetime" : @"datetime",
-       @"id"       : @"runId"
-       }
-     ];
-    
-    RKObjectMapping *requestMapping = [RKObjectMapping requestMapping]; // objectClass == NSMutableDictionary
-    [requestMapping
-     addAttributeMappingsFromDictionary:
-     @{
-       @"distance" : @"distance",
-       @"duration" : @"duration",
-       @"datetime" : @"datetime",
-       @"userId"  :  @"user_id"
-       }
-     ];
-    
-    NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
-    
-    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor
-                                                responseDescriptorWithMapping:responseMapping
-                                                method:RKRequestMethodAny
-                                                pathPattern:requestPathResponseReady
-                                                keyPath:@""
-                                                statusCodes:statusCodes];
-    
-    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor
-                                              requestDescriptorWithMapping:requestMapping
-                                              objectClass:[Run class]
-                                              rootKeyPath:@""
-                                              method:RKRequestMethodAny];
-    
-    [[RKObjectManager sharedManager] addRequestDescriptor:requestDescriptor];
-    [[RKObjectManager sharedManager] addResponseDescriptor:responseDescriptor];
-    
-    NSManagedObjectContext *moc =[[[RKObjectManager sharedManager]managedObjectStore]mainQueueManagedObjectContext];
-    
-    
-    // POST with image
-    
-    if (self.runImage.image !=nil) {
-        
-        NSMutableURLRequest *request = [[RKObjectManager sharedManager]
-                                        multipartFormRequestWithObject:_currentRun
-                                        method:RKRequestMethodPOST
-                                        path:requestPath
-                                        parameters:nil
-                                        constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                                            
-                                            NSData *imgData = UIImagePNGRepresentation(self.runImage.image);
-                                            NSLog(@"Size of ori Image(bytes):%lu",(unsigned long)[imgData length]);
-                                            
-                                            int SIZE_LIMIT = 1024*1024;
-                                            float compressionQuality = 1;
-                                            
-                                            while ((unsigned long)[imgData length] > SIZE_LIMIT) {
-                                                
-                                                imgData = UIImageJPEGRepresentation(self.runImage.image,compressionQuality);
-                                                compressionQuality = compressionQuality-0.1;
-                                                NSLog(@"Size of sma Image(bytes):%lu",(unsigned long)[imgData length]);
-                                            }
-                                            
-                                            [formData appendPartWithFileData:imgData
-                                                                        name:@"rod_images_attributes[0][image]"
-                                                                    fileName:[self randomFileName:32 withExtension:@"jpg"]
-                                                                    mimeType:@"image/jpg"];}];
-        
-        
-        RKManagedObjectRequestOperation *operation = [[RKObjectManager sharedManager]
-                                                      managedObjectRequestOperationWithRequest:request
-                                                      managedObjectContext:moc
-                                                      success:
-                                                      ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                                                          [SVProgressHUD dismiss];
-                                                          [self.navigationController popViewControllerAnimated:YES];}
-                                                      failure:
-                                                      ^(RKObjectRequestOperation *operation, NSError *error) {
-                                                          [SVProgressHUD dismiss];}];
-        
-        operation.targetObject = _currentRun;
-        [[RKObjectManager sharedManager] enqueueObjectRequestOperation:operation]; // NOTE: Must be enqueued rather than started
-        
-    } else {
-        
-        [[RKObjectManager sharedManager] postObject:_currentRun
-                                               path:requestPath
-                                         parameters:nil
-                                            success:
-         ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-             [SVProgressHUD dismiss];
-             [self.navigationController popViewControllerAnimated:YES];}
-                                            failure:
-         ^(RKObjectRequestOperation *operation, NSError *error) {
-             [SVProgressHUD dismiss];}];
-    }
+    AppData *appData = [AppData sharedManager];
+    [appData updateRun:_currentRun withBlock:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 -(void) setLabel:(NSString*)label toUIButton:(UIButton*)button {
     
     [button setTitle:label forState:UIControlStateNormal];
-    
 }
 
 -(NSDate*) dateFromNSString:(NSString *)dateString {
@@ -288,6 +161,19 @@
 
 - (IBAction)selectADistance:(id)sender {
     
+    float totalDistance = [_runDistance floatValue];
+    float myKm = (int) totalDistance; //returns 5 feet
+    float myMeters = totalDistance-myKm;
+    myMeters = myMeters*100;
+    
+    if (_distanceKmPart == nil) {
+        _distanceKmPart = [NSNumber numberWithInt:totalDistance];
+    }
+
+    if (_distanceMeterPart == nil) {
+        _distanceMeterPart = [NSNumber numberWithInt:myMeters];
+    }
+
     [ActionSheetDistancePicker showPickerWithTitle:@"Select Distance" bigUnitString:@"." bigUnitMax:99 selectedBigUnit:[self.distanceKmPart integerValue]smallUnitString:@"km" smallUnitMax:99 selectedSmallUnit:[self.distanceMeterPart integerValue] target:self action:@selector(measurementWasSelectedWithBigUnit:smallUnit:element:) origin:sender];
 }
 
@@ -296,6 +182,7 @@
     self.distanceKmPart = bigUnit;
     self.distanceMeterPart = smallUnit;
     self.runDistance = [NSNumber numberWithFloat:[bigUnit floatValue]+[smallUnit floatValue]/100];
+    _currentRun.distance = _runDistance;
     [self setLabel:[NSString stringWithFormat:@"%2.2f km", [self.runDistance floatValue]] toUIButton:self.btnDistance];
 }
 
@@ -331,6 +218,7 @@
 
 - (void)dateWasSelected:(NSDate *)selectedDate element:(id)element {
     self.runDateAndTime = selectedDate;
+     _currentRun.datetime = _runDateAndTime;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
@@ -368,6 +256,7 @@
     
     if (interval > 0) {
         self.runDuration = [NSNumber numberWithInt:interval];
+        _currentRun.duration = _runDuration;
         [self setLabel:[self timeFormatted:interval] toUIButton:self.btnDuration];
     }
     

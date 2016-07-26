@@ -10,42 +10,15 @@
 
 @implementation UtilMethods
 
-+ (UIImage*)imageWithImage:(UIImage*)image
-              scaledToSize:(CGSize)newSize
-{
-    UIGraphicsBeginImageContext( newSize );
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
++(NSString *) randomFileName:(int)len withExtension: (NSString*)extension {
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     
-    return newImage;
-}
-
-+ (CGRect)rectForText:(NSString *)text usingFont:(UIFont *)font boundedBySize:(CGSize)maxSize
-{
-    if (!text || text.length == 0) {
-        text = @"Updating...";
-    }
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:text
-                                                                     attributes:@{ NSFontAttributeName:font}];
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
     
-    return [attrString boundingRectWithSize:maxSize
-                                    options:NSStringDrawingUsesLineFragmentOrigin
-                                    context:nil];
-}
-
-+ (NSString *)shortStringOfNumber:(NSInteger)number {
-    NSString * shortNumber;
-    if (number >= 1000000) {
-        shortNumber = [NSString stringWithFormat:@"%zdm", number / 1000000];
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
     }
-    else if (number > 1000) {
-        shortNumber = [NSString stringWithFormat:@"%zdk", number / 1000];
-    }
-    else {
-        shortNumber = [NSString stringWithFormat:@"%zd", number];
-    }
-    return shortNumber;
+    return [NSString stringWithFormat:@"%@.%@",randomString,extension];
 }
 
 @end

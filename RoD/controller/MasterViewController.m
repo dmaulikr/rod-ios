@@ -11,12 +11,7 @@
 #import "NewRunViewController.h"
 #import "RunTableViewCell.h"
 
-#import <RestKit/CoreData.h>
-#import <RestKit/RestKit.h>
 #import <math.h>
-
-#import "Run.h"
-#import "User.h"
 
 #import "DateTools.h"
 #import "MathController.h"
@@ -30,14 +25,9 @@
 
 @implementation MasterViewController
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
-
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -47,13 +37,6 @@
 - (void) onPostResource:(NewRunViewController *)sender {
     [self requestData];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 
 // During startup (-viewDidLoad or in storyboard) do:
 
@@ -66,45 +49,14 @@
     return YES;
 }
 
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        //add code here for when you hit delete
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *userToken = [defaults objectForKey:@"user_token"];
-        NSString *userEmail = [defaults objectForKey:@"user_email"];
-        NSString *userId    = [defaults objectForKey:@"user_id"];
-        
-        Run *run = self.runs[indexPath.row];
-        
-        NSString *requestPath = [NSString stringWithFormat:@"/api/v1/runs/%@?user_email=%@&user_token=%@", run.runId, userEmail, userToken];
-        
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-        
-        [[RKObjectManager sharedManager] deleteObject:run path:requestPath parameters:nil success: ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            //runs have been saved in core data by now
-            [SVProgressHUD dismiss];
-
-
-        }
-                                              failure: ^(RKObjectRequestOperation *operation, NSError *error) {
-                                                  [SVProgressHUD dismiss];
-                                                  
-                                                  ALERT_WITH_TITLE(@"", NSLocalizedString(@"Error while loading runs", nil));
-                                                  
-                                                  RKLogError(@"Load failed with error: %@", error);
-                                              }];
-        
+        AppData* appData = [AppData sharedManager];
+        [appData deleteRun:(Run*)self.runs[indexPath.row]];
         [self.runs removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-
-        
     }
 }
 
@@ -127,8 +79,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    NSLog(@"Number of rows: %lu", (unsigned long)[self.runs count]);
     return [self.runs count];
 }
 
@@ -137,7 +87,6 @@
     RunTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Run" forIndexPath:indexPath];
     Run *run = self.runs[indexPath.row];
     cell.date_human_txt.text = run.datetime.timeAgoSinceNow;
-    //cell.pace_txt.text = run.pace;
  
     float totalDistance = [run.distance floatValue];
     float myKm = (int) totalDistance; //returns 5 feet
@@ -155,10 +104,8 @@
     
     float speed = [MathController speedWithDistance:[run.distance floatValue] andDuration:[run.duration floatValue]];
     NSString *badg_name = [NSString stringWithFormat:@"white_%@",[MathController speedBadge:speed]];
-    
     cell.pace_icon.image = [UIImage imageNamed:badg_name];
 
-    
     return cell;
 }
 
@@ -167,33 +114,14 @@
 
 - (void)requestData {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString *userToken = [defaults objectForKey:@"user_token"];
-    NSString *userEmail = [defaults objectForKey:@"user_email"];
-    NSString *userId    = [defaults objectForKey:@"user_id"];
-    NSString *requestPath = [NSString stringWithFormat:@"/api/v1/users/%@?user_email=%@&user_token=%@", userId, userEmail, userToken];
-    
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-    
-    [[RKObjectManager sharedManager]
-     getObjectsAtPath:requestPath
-     parameters:nil
-     success: ^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-         //runs have been saved in core data by now
-         [self fetchRunsFromContext];
-         [SVProgressHUD dismiss];
+    AppData *appData = [AppData sharedManager];
+    [appData requestUserRuns:^{
+        [self fetchRunsFromContext];
+    }];
 
-     }
-     failure: ^(RKObjectRequestOperation *operation, NSError *error) {
-         [SVProgressHUD dismiss];
-
-         ALERT_WITH_TITLE(@"", NSLocalizedString(@"Error while loading runs", nil));
-
-         RKLogError(@"Load failed with error: %@", error);
-     }
-     ];
 }
+
+//OPTIMIZE: move to AppData
 
 - (void)fetchRunsFromContext {
     
@@ -214,7 +142,6 @@
 
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 
-    
 }
 
 @end

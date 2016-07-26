@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/CoreData.h>
+#import <RestKit/RestKit.h>
+#import <MagicalRecord/MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord+ShorthandMethods.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

@@ -7,11 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "DetailViewController.h"
-#import <RestKit/CoreData.h>
-#import <RestKit/RestKit.h>
-#import <MagicalRecord/MagicalRecord.h>
-#import <MagicalRecord/MagicalRecord+ShorthandMethods.h>
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -28,31 +23,16 @@
 @synthesize managedObjectContext;
 
 
--(BOOL) authenticatedUser {
-    
-    // Get the stored data before the view loads
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString *userToken = [defaults objectForKey:@"user_token"];
-    NSString *userEmail = [defaults objectForKey:@"user_email"];
-    
-    if ([userEmail length] > 3 && [userToken length] > 3) {
-        return TRUE;
-
-    } else {
-        return FALSE;
-    }
-}
-
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [Flurry startSession:@"DBZ2TQV3FXB8MMSXNPWX"];
     
     [MagicalRecord enableShorthandMethods];
     
+    AppData *appData = [AppData sharedManager];
+    
     // Initialize RestKit
-     NSURL *baseURL = [NSURL URLWithString:ENDPOINT_URL];
+    NSURL *baseURL = [NSURL URLWithString:ENDPOINT_URL];
     
     RKObjectManager *objectManager = [RKObjectManager managerWithBaseURL:baseURL];
     
@@ -62,7 +42,6 @@
     RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc] initWithManagedObjectModel:managedObjectModel];
     objectManager.managedObjectStore = managedObjectStore;
 
-    
     // Complete Core Data stack initialization
     [managedObjectStore createPersistentStoreCoordinator];
     NSString *storePath = [RKApplicationDataDirectory() stringByAppendingPathComponent:@"RoD.sqlite"];
@@ -134,25 +113,22 @@
     
  
     //authenticatedUser: check from NSUserDefaults User credential if its present then set your navigation flow accordingly
-    if (self.authenticatedUser)
+    if (![appData authenticatedUser])
     {
-        UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        UINavigationController *controller = [storyBoard instantiateInitialViewController];
-        
-        [Flurry logAllPageViewsForTarget:controller];
-        self.window.rootViewController =  controller;
-        
-    }
-    else
-    {
-        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"login_vc"];
-        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
-        
-        [Flurry logAllPageViewsForTarget:navigation];
-        self.window.rootViewController = navigation;
+        [self showLoginScreen];
     }
     
     return YES;
+}
+
+-(void) showLoginScreen {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    UIViewController* controller = (LoginViewController*)[storyboard instantiateViewControllerWithIdentifier:@"login_vc"];
+    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:controller];
+    
+    [Flurry logAllPageViewsForTarget:navigation];
+    self.window.rootViewController = navigation;
 }
 
 // Shared context
@@ -167,41 +143,11 @@
     return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
-
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
     [MagicalRecord cleanUp];
 }
 
-#pragma mark - Split view
-//
-//- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-//    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] && ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
-//        // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-//        return YES;
-//    } else {
-//        return NO;
-//    }
-//}
 
 @end

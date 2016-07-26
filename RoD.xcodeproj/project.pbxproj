@@ -46,6 +46,7 @@
 		1F844C711D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
 		1F844C721D2165D2002EC430 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F844C661D2165D2002EC430 /* User.m */; };
 		1F9343BD1D469150003217CE /* chartjs.html in Resources */ = {isa = PBXBuildFile; fileRef = 1F9343BC1D469150003217CE /* chartjs.html */; };
+		1F956A3D1D4797A100145D86 /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F956A3C1D4797A100145D86 /* AppData.m */; };
 		1F9D463C1D4529FE003731DE /* StatsControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9D463B1D4529FE003731DE /* StatsControllerViewController.m */; };
 		1F9D46401D453549003731DE /* Stats.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9D463F1D453549003731DE /* Stats.m */; };
 		92F2FA2E1814C49D223C9766 /* libPods-RoD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 609EFA5C4F6EFD4EDC3F09B8 /* libPods-RoD.a */; };
@@ -128,6 +129,8 @@
 		1F844C651D2165D2002EC430 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		1F844C661D2165D2002EC430 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		1F9343BC1D469150003217CE /* chartjs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = chartjs.html; sourceTree = "<group>"; };
+		1F956A3C1D4797A100145D86 /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
+		1F956A3E1D4797B400145D86 /* AppData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		1F9D463A1D4529FE003731DE /* StatsControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsControllerViewController.h; path = Stats/StatsControllerViewController.h; sourceTree = "<group>"; };
 		1F9D463B1D4529FE003731DE /* StatsControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsControllerViewController.m; path = Stats/StatsControllerViewController.m; sourceTree = "<group>"; };
 		1F9D463D1D45309E003731DE /* Stats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stats.h; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 				1F172F301D3A8EE700C12AAA /* UtilMethods.m */,
 				1F26A7441D400B5000D722B3 /* MathController.m */,
 				1F26A7461D400B6100D722B3 /* MathController.h */,
+				1F956A3C1D4797A100145D86 /* AppData.m */,
+				1F956A3E1D4797B400145D86 /* AppData.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -687,6 +692,7 @@
 				1F9D46401D453549003731DE /* Stats.m in Sources */,
 				1F9D463C1D4529FE003731DE /* StatsControllerViewController.m in Sources */,
 				1F172F311D3A8EE700C12AAA /* UtilMethods.m in Sources */,
+				1F956A3D1D4797A100145D86 /* AppData.m in Sources */,
 				1F4E17481D3AED1D001BA82D /* MeViewController.m in Sources */,
 				1F24EDBF1D39C28200169546 /* PaddingTextField.m in Sources */,
 				1F64856C1D2470390019EB8A /* NewRunViewController.m in Sources */,

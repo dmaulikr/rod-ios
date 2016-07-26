@@ -19,13 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;
-    // Do any additional setup after loading the view.
-//    tf_email.layer.cornerRadius = 2;
-//    tf_email.layer.borderColor = [[UIColor colorFromHexString:@"#ccccce"] CGColor];
-//    tf_email.layer.borderWidth = 1;
-//    tf_email.layer.masksToBounds = YES;
-    [self.view setBackgroundColor:[UIColor blackColor]];
-    [tf_email setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Email" attributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont systemFontOfSize:17]}]];
     
     btn_reset.layer.masksToBounds = YES;
     btn_reset.layer.cornerRadius = 25;
@@ -42,11 +35,8 @@
     [self.navigationController.navigationBar setBackgroundImage:nil
                                                   forBarMetrics:UIBarMetricsDefault];   
     
-//    httpClient = [[AFCustomClient alloc] initWithBaseURL:[NSURL URLWithString:base_url]];
-    
-    tf_email.leftViewNormal = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_email"]];
-    tf_email.leftViewHighlight = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_email_p"]];
-    [tf_email setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Email" attributes:@{NSForegroundColorAttributeName : PLACEHOLDER_COLOR, NSFontAttributeName : [UIFont systemFontOfSize:17]}]];
+    tf_email.leftViewNormal = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_about_us"]];
+    tf_email.leftViewHighlight = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_about_us_p"]];
 }
 
 - (void)didReceiveMemoryWarning {

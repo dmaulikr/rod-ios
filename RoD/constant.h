@@ -106,6 +106,7 @@ typedef enum : NSUInteger {
 
 #define kFirstPage  1
 #define kPageSize   10
+#define kImageUploadSize   1024*(1024/0.7)
 
 typedef enum : NSUInteger {
     USER_STATUS_LOGGEDOUT = -1,
@@ -121,6 +122,10 @@ typedef enum : NSUInteger {
     DATETIME_PICKED = -1,
     DATETIME_NOT_PICKED = 1
 } DATETIME_PICKER;
+
+// User interface constants
+#define PLACEHOLDER_COLOR [UIColor colorWithRed:89/255.0 green:107/255.0 blue:121/255.0 alpha:1.0]
+
 
 @interface constant : NSObject
 

@@ -103,13 +103,9 @@
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                                                             // Store the data
-                                                                                            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                                                                                             
-                                                                                            [defaults setObject:txtEmail.text forKey:@"user_email"];
-                                                                                            [defaults setObject:[JSON objectForKey:@"auth_token"] forKey:@"user_token"];
-                                                                                            [defaults setObject:[JSON objectForKey:@"user_id"] forKey:@"user_id"];
-                                                                                            
-                                                                                            [defaults synchronize];
+                                                                                            AppData *appData = [AppData sharedManager];
+                                                                                            [appData saveUserSession:JSON];
 
                                                                                             [self pushAuthUserView];
                                                                                                                                                                                         [SVProgressHUD dismiss];
