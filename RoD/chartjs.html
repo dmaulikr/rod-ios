@@ -34,11 +34,38 @@
     </body>
     <script>
         
+        var label_prefix = "W";
+        var label = [];
+        var goal = [];
+        var real = [];
+        
+        for (var i = temp.stats.length-1; i >= 0; i--) {
+            label.push(label_prefix.concat(temp.stats[i].number));
+            goal.push(temp.stats[i].goal);
+            real.push(temp.stats[i].total_kms);
+        }
+    
+    var cutoff_index = label.indexOf(label_prefix.concat(week));
+        
+    var start_index = 0;
+    if (cutoff_index+1 > 6) {
+        start_index = (cutoff_index+1)-6
+    }
+    
+    label = label.slice(start_index, cutoff_index+1);
+    goal = goal.slice(start_index, cutoff_index+1);
+    real = real.slice(start_index, cutoff_index+1);
+    
+    var real_max = Math.max.apply(Math, real);
+    var goal_max = Math.max.apply(Math, goal);
+    
+    var max_chart = Math.max(real_max, goal_max);
+    
         Chart.defaults.global.animationEasing        = 'easeInOutQuad',
         Chart.defaults.global.responsive             = true;
         Chart.defaults.global.scaleOverride          = true;
         Chart.defaults.global.scaleShowLabels        = true;
-        Chart.defaults.global.scaleSteps             = 6;
+        Chart.defaults.global.scaleSteps             = Math.ceil(max_chart/10);
         Chart.defaults.global.scaleStepWidth         = 10;
         Chart.defaults.global.scaleStartValue        = 0;
         Chart.defaults.global.scaleLabel             = "<%=value%> km";
@@ -57,7 +84,7 @@
         gradient = chart.createLinearGradient(0, 0, 0, 450);
         
         var data  = {
-            labels: ["W25", "W26", "W27", "W28", "W29", "W30"],
+            labels: label,
             datasets: [{
                        label: 'Target',
                        fillColor: 'rgba(98, 64, 184, 0.25)',
@@ -66,7 +93,7 @@
                        pointStrokeColor: 'rgba(220,220,220,1)',
                        pointHighlightFill: '#6240b8',
                        pointHighlightStroke: 'rgba(220,220,220,1)',
-                       data: [50, 45, 53, 47, 50, 25]
+                       data: goal
                        },{
                        label: 'Reals',
                        fillColor: 'rgba(10, 175, 246, 0.25)',
@@ -75,7 +102,7 @@
                        pointStrokeColor: 'rgba(220,220,220,1)',
                        pointHighlightFill: '#0aaff6',
                        pointHighlightStroke: 'rgba(220,220,220,1)',
-                       data: [50.16, 26.49, 53.04, 46.86, 24.58, 0]
+                       data: real
                        }]};
     
     gradient.addColorStop(0, 'rgba(98, 64, 184, 0.5)');

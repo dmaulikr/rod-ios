@@ -18,10 +18,15 @@
     [super viewDidLoad];
     [self loadStats];
     [self buildView];
+    _chartView.delegate = self;
 
     _statsPosition = 0;
     
     // Do any additional setup after loading the view.
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,37 +36,40 @@
 - (IBAction)forwardStatus:(id)sender {
     _statsPosition = _statsPosition-1;
     [self buildView];
+//    [self loadChart];
 }
 - (IBAction)backwardStatus:(id)sender {
     _statsPosition = _statsPosition+1;
     [self buildView];
+//    [self loadChart];
 }
 
 #pragma mark - RESTKit
+
+- (void) loadChart {
+    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"chartjs" ofType:@"html"];
+    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+    NSString *jsInject = [NSString stringWithFormat:@"var week = %i; var temp = %@",[_currentStats.number intValue],_jsonResponse];
+    
+    _chartView.opaque = NO;
+    _chartView.backgroundColor = [UIColor clearColor];
+
+    [_chartView loadHTMLString:htmlString baseURL:nil];
+    [_chartView stringByEvaluatingJavaScriptFromString:jsInject];
+
+}
 
 
 - (void) buildView {
     NSLog(@"stats ->[%lu]",[_statsArray count]);
     if ([_statsArray count]>0) {
-        Stats *currentStats = [_statsArray objectAtIndex:_statsPosition];
-        _weekDistance.text = [NSString stringWithFormat:@"%02.1f",[currentStats.total_kms floatValue]];
-        _weekGoal.text = [NSString stringWithFormat:@"%02i",[currentStats.goal intValue]];
-        _weekPace.text = [NSString stringWithFormat:@"%@",currentStats.pace];
-        _weekRunCount.text = [NSString stringWithFormat:@"%i",[currentStats.run_count intValue]];
-        _weekNumber.text = [NSString stringWithFormat:@"semana %i",[currentStats.number intValue]];
-        [_goalProgress setValue:([currentStats.total_kms floatValue]/[currentStats.goal intValue])*100 animateWithDuration:1];
-        
-        _chartView.opaque = NO;
-        _chartView.backgroundColor = [UIColor clearColor];
-        
-        NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"chartjs" ofType:@"html"];
-        NSLog(@"file ->%@", htmlFile);
-        NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
-        NSLog(@"content ->%@",htmlString);
-        [_chartView loadHTMLString:htmlString baseURL:nil];
-        
-    } else {
-        
+        _currentStats = [_statsArray objectAtIndex:_statsPosition];
+        _weekDistance.text = [NSString stringWithFormat:@"%02.1f",[_currentStats.total_kms floatValue]];
+        _weekGoal.text = [NSString stringWithFormat:@"%02i",[_currentStats.goal intValue]];
+        _weekPace.text = [NSString stringWithFormat:@"%@",_currentStats.pace];
+        _weekRunCount.text = [NSString stringWithFormat:@"%i",[_currentStats.run_count intValue]];
+        _weekNumber.text = [NSString stringWithFormat:@"semana %i",[_currentStats.number intValue]];
+        [_goalProgress setValue:([_currentStats.total_kms floatValue]/[_currentStats.goal intValue])*100 animateWithDuration:1];
     }
     
     if ([_statsArray count] <= 1) {
@@ -85,7 +93,6 @@
 {
    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
     NSString *userToken = [defaults objectForKey:@"user_token"];
     NSString *userEmail = [defaults objectForKey:@"user_email"];
     NSString *userId    = [defaults objectForKey:@"user_id"];
@@ -110,7 +117,13 @@
     [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 
         _statsArray = [NSArray arrayWithArray:mappingResult.array];
+
         [self buildView];
+ 
+        _jsonResponse = operation.HTTPRequestOperation.responseString ;
+        
+        [self loadChart];
+        
 
 
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {

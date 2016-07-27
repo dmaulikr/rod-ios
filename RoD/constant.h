@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #ifdef DEVEL
-#define ENDPOINT_URL @"http://localhost:3000"
+//#define ENDPOINT_URL @"http://localhost:3000"
+#define ENDPOINT_URL @"https://protected-reaches-89531.herokuapp.com"
 #elif defined(STAGING)
 #define ENDPOINT_URL @"http://stagingserver:8080/EndPoint"
 #else
-#define ENDPOINT_URL @"http://app.runordie.run"
+#define ENDPOINT_URL @"https://protected-reaches-89531.herokuapp.com"
 #endif
 
 #define base_url  @"http://test.inspius.com/yovideo/api"

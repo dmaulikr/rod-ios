@@ -23,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *forwardButton;
 @property (weak, nonatomic) IBOutlet UIButton *backwardButton;
 @property (weak, nonatomic) IBOutlet UIWebView *chartView;
+@property (strong, nonatomic) NSString *jsonResponse;
+@property (strong, nonatomic) Stats *currentStats;
+@property bool didLoadJSON;
 
 -(void) buildView;
 
