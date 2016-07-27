@@ -68,7 +68,7 @@
         _weekGoal.text = [NSString stringWithFormat:@"%02i",[_currentStats.goal intValue]];
         _weekPace.text = [NSString stringWithFormat:@"%@",_currentStats.pace];
         _weekRunCount.text = [NSString stringWithFormat:@"%i",[_currentStats.run_count intValue]];
-        _weekNumber.text = [NSString stringWithFormat:@"semana %i",[_currentStats.number intValue]];
+        _weekNumber.text = [NSString stringWithFormat:@"week %i",[_currentStats.number intValue]];
         [_goalProgress setValue:([_currentStats.total_kms floatValue]/[_currentStats.goal intValue])*100 animateWithDuration:1];
     }
     
